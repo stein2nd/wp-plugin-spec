@@ -9,6 +9,7 @@
 
 各プラグインは、以下のディレクトリ構成を基本とする。
 
+```
 plugin-name/
 ├─ package.json # ビルド設定
 ├─ SPEC.md # プラグイン固有仕様
@@ -22,6 +23,7 @@ plugin-name/
 ├─ src/ # TypeScript/React/SCSS ソース
 ├─ dist/ # Vite ビルド成果物 (Git管理外)
 └─ languages/ # 翻訳ファイル (.pot, .po, .mo)
+```
 
 ---
 
@@ -39,7 +41,7 @@ plugin-name/
 
 - `vite.config.ts` を用いて IIFE 形式でバンドルする  
 - 出力先は `dist/`  
-- JavaScript は WordPress 同梱の jQuery を利用可能とする（外部 import 不要）  
+- JavaScript は WordPress 同梱の jQuery を利用可能とする（外部 import 不要） (`jQuery(function($) { ... })`)
 - CSS も IIFE 出力し、エディタ用・フロント用を区別すること  
 - Production ビルド時は minify 有効化チェックあり  
 
@@ -49,7 +51,7 @@ plugin-name/
 
 - クラスベースで実装し、名前空間衝突を避ける  
 - クラス命名規則: `Vendor_Plugin_Function` 形式 (例: `S2J_SlugGenerater_REST`)  
-- WordPress コーディング規約 (PHPCS, WPCS) を準拠  
+- WordPress コーディング規約 (PHPCS, WPCS) に準拠  
 - 主要な機能はクラスにまとめ、`includes/` に配置すること  
 
 ---
@@ -74,8 +76,7 @@ plugin-name/
 
 ## 7. Classic エディタ対応（必要な場合）
 
-- `assets/classic.js` または `src/classic.ts` に記述し、IIFE で出力  
-- WordPress 同梱の jQuery を前提とする (`jQuery(function($) { ... })`)  
+- `assets/classic.js` または `src/classic.ts` に記述
 - Classic Editor 専用 UI は `add_meta_box` で提供する  
 
 ---
