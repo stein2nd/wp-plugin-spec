@@ -41,14 +41,14 @@ plugin-name/
 - 出力先は `dist/`  
 - JavaScript は WordPress 同梱の jQuery を利用可能とする（外部 import 不要）  
 - CSS も IIFE 出力し、エディタ用・フロント用を区別すること  
-- Production ビルド時は minify、有効化チェックあり  
+- Production ビルド時は minify 有効化チェックあり  
 
 ---
 
 ## 4. PHP コード規約
 
 - クラスベースで実装し、名前空間衝突を避ける  
-- クラス命名規則: `Vendor_Plugin_Function` 形式 (例: `S2J_SlugGenerator_REST`)  
+- クラス命名規則: `Vendor_Plugin_Function` 形式 (例: `S2J_SlugGenerater_REST`)  
 - WordPress コーディング規約 (PHPCS, WPCS) を準拠  
 - 主要な機能はクラスにまとめ、`includes/` に配置すること  
 
