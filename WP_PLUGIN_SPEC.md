@@ -51,8 +51,11 @@ plugin-name/  # プラグインフォルダー
   * JavaScript は WordPress 同梱の jQuery を利用可能とする （外部 import 不要） (`jQuery(function($) { ... })`)
   * CSS も IIFE 出力し、エディタ用・フロント用を区別すること
 * 出力は `./dist`
-* `npm run dev` → 開発用ビルド（minify 無効）
-* `npm run build` → 本番用ビルド（minify 有効）
+
+### 3.1 `package.json` の `scripts`
+
+* `npm run build:dev` → 開発用ビルド（minify 無効）
+* `npm run build:production` → 本番用ビルド（minify 有効）
 
 ---
 
