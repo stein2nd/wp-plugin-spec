@@ -84,7 +84,13 @@ plugin-name/  # プラグインフォルダー
 
 ---
 
-## 7. 管理画面仕様
+## 7. スタイル規約
+
+* 余白・間隔 (padding, margin, blockGap 等)、テキストサイズ を rem で定義すること
+
+---
+
+## 8. 管理画面仕様
 
 * 設定ページは `add_options_page` または `add_menu_page` を利用
 * 設定値は `register_setting` / `get_option` / `update_option` を利用
@@ -93,7 +99,7 @@ plugin-name/  # プラグインフォルダー
 
 ---
 
-## 8. REST API 仕様
+## 9. REST API 仕様
 
 * すべての REST エンドポイントは `/plugin-slug/v1/...` を基本とする
 * `permission_callback` で権限チェックを必ず行う
@@ -102,7 +108,7 @@ plugin-name/  # プラグインフォルダー
 
 ---
 
-## 9. Gutenberg ブロック仕様
+## 10. Gutenberg ブロック仕様
 
 * [ブロックエディターハンドブック](https://ja.wordpress.org/team/handbook/block-editor/) に準拠する
 * ブロックは `src/` に実装し、`register_block_type` で `dist/` 出力物を読み込む
@@ -112,14 +118,14 @@ plugin-name/  # プラグインフォルダー
 
 ---
 
-## 10. Classic エディタ対応（必要な場合）
+## 11. Classic エディタ対応（必要な場合）
 
 * `assets/classic.js` または `src/classic.ts` に記述
 * Classic エディタ専用 UI は `add_meta_box` で提供する
 
 ---
 
-## 11. バージョン管理・配布
+## 12. バージョン管理・配布
 
 * `dist/` は Git 管理対象外とする
 * GitHub リポジトリは private を基本とする（OSS化時は public に切り替え）
@@ -128,12 +134,10 @@ plugin-name/  # プラグインフォルダー
 
 ---
 
-## 12. 今後の拡張（将来フェーズ）
+## 13. 今後の拡張（将来フェーズ）
 
 * `templates/` ディレクトリに開発テンプレート一式を配置予定
   * サンプル `vite.config.ts`
   * サンプル `package.json`
   * サンプル `class-rest.php`
 * OSS 化を想定し、Public リポジトリ版の `WP_PLUGIN_SPEC.md` を用意予定
-
----
