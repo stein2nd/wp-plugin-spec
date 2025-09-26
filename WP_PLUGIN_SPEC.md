@@ -108,24 +108,29 @@ plugin-name/  # プラグインフォルダー
 
 ---
 
-## 10. Gutenberg ブロック仕様
+## 10. CSS 単位の利用
+- WordPress コアの慣例に準拠し、`rem` を基本単位とする。  
+- `px` は微調整や境界条件に限って利用する。  
+- `em` はコンポーネント内部の相対サイズ調整に限定する。  
+
+## 11. Gutenberg ブロック仕様
 
 * [ブロックエディターハンドブック](https://ja.wordpress.org/team/handbook/block-editor/) に準拠する
 * ブロックは `src/` に実装し、`register_block_type` で `dist/` 出力物を読み込む
 * `edit` 側は React Hooks を利用
 * 翻訳文字列は `@wordpress/i18n` を利用 (`__()`, `_x()`)
 * `save` は必要に応じて実装するが、REST 経由の処理が多いため `null` 戻りが基本
+* Gutenberg 用ブロックは `block.json` を正とし、編集画面・保存処理の双方で仕様を満たすこと  
 
----
-
-## 11. Classic エディタ対応（必要な場合）
+## 12. Classic エディタ対応 (必要な場合)
 
 * `assets/classic.js` または `src/classic.ts` に記述
 * Classic エディタ専用 UI は `add_meta_box` で提供する
+* Classic Editor 用ショートコードは **補助互換レイヤー** として実装し、プライマリ仕様はブロックに置く。  
 
 ---
 
-## 12. バージョン管理・配布
+## 13. バージョン管理・配布
 
 * `dist/` は Git 管理対象外とする
 * GitHub リポジトリは private を基本とする（OSS化時は public に切り替え）
@@ -134,7 +139,7 @@ plugin-name/  # プラグインフォルダー
 
 ---
 
-## 13. Backlog
+## 14. Backlog
 
 * `templates/` ディレクトリに開発テンプレート一式を配置予定
   * サンプル `vite.config.ts`
