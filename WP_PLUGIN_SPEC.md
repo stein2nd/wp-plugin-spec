@@ -5,9 +5,18 @@
 
 ---
 
-## 1. プロジェクト構成
+## 1. 準拠ドキュメント
 
-### 1.1 フォルダ構成
+* [WordPress コーディング規約ハンドブック](https://ja.wordpress.org/team/handbook/coding-standards/)
+* [WordPress プラグイン開発ハンドブック](https://ja.wordpress.org/team/handbook/plugin-development/)
+
+---
+
+## 2. プロジェクト構成
+
+* 本章では、「ファイル構造」を記載します。
+
+### 2.1 フォルダ構成
 
 各プラグインは、以下のディレクトリ構成を基本とします。
 
@@ -34,7 +43,9 @@ plugin-name/  # プラグインフォルダー
 
 ---
 
-## 2. 開発環境
+## 3. 技術スタック・開発環境
+
+* 本章では、「開発に必要な技術情報」を記載します。
 
 * Node.js v18+
 * npm v9+
@@ -42,9 +53,14 @@ plugin-name/  # プラグインフォルダー
 * WordPress 6.x 系を対象
 * ローカル開発は「Local by Flywheel」または同等の環境を利用すること
 
----
+### 3.1 フロントエンド技術スタック
 
-## 3. ビルド要件
+* **React 18.2**: 管理画面 UI の構築
+* **TypeScript 5.9**: 型安全性の確保
+* **SCSS**: スタイル管理とデザインシステム
+* **Vite 7.1**: 高速ビルドとモジュールバンドリング
+
+### 3.2 ビルド要件
 
 * Vite + TypeScript + SCSS
   * `vite.config.ts` を用いて IIFE 形式でバンドルする
@@ -52,21 +68,19 @@ plugin-name/  # プラグインフォルダー
   * CSS も IIFE 出力し、エディタ用・フロント用を区別すること
 * 出力は `./dist`
 
-### 3.1 `package.json` の `scripts`
+### 3.3 `package.json` の `scripts`
 
 * `npm run build:dev` → 開発用ビルド（minify 無効）
 * `npm run build:production` → 本番用ビルド（minify 有効）
+* `npm run dev` → 開発用ビルド (watch モード)
+* `npm run lint` → ESLint + Stylelint によるコード品質チェック
+* `npm run makepot` → 翻訳テンプレート生成
 
 ---
 
-## 4. 準拠ドキュメント
+## 4. 国際化
 
-* [WordPress コーディング規約ハンドブック](https://ja.wordpress.org/team/handbook/coding-standards/)
-* [WordPress プラグイン開発ハンドブック](https://ja.wordpress.org/team/handbook/plugin-development/)
-
----
-
-## 5. 国際化
+* 本章では、「多言語対応」を記載します。
 
 * テキストはすべて `__()` / `_e()` / `_x()` を適切に使用
 * 翻訳ファイルは `languages/` に配置
@@ -75,7 +89,7 @@ plugin-name/  # プラグインフォルダー
 
 ---
 
-## 6. PHP コード規約
+## 5. PHP コード規約
 
 * クラスベースで実装し、名前空間衝突を避ける
 * クラス命名規則: `Vendor_Plugin_Function` 形式 (例: `S2J_SlugGenerater_REST`) 
@@ -84,13 +98,16 @@ plugin-name/  # プラグインフォルダー
 
 ---
 
-## 7. スタイル規約
+## 6. スタイル規約
 
 * 余白・間隔 (padding, margin, blockGap 等)、テキストサイズ を rem で定義すること
+* WordPress コアの慣例に準拠し、`rem` を基本単位とする。  
+* `px` は微調整や境界条件に限って利用する。  
+* `em` はコンポーネント内部の相対サイズ調整に限定する。  
 
 ---
 
-## 8. 管理画面仕様
+## 7. 管理画面仕様
 
 * 設定ページは `add_options_page` または `add_menu_page` を利用
 * 設定値は `register_setting` / `get_option` / `update_option` を利用
@@ -99,7 +116,7 @@ plugin-name/  # プラグインフォルダー
 
 ---
 
-## 9. REST API 仕様
+## 8. REST API 仕様
 
 * すべての REST エンドポイントは `/plugin-slug/v1/...` を基本とする
 * `permission_callback` で権限チェックを必ず行う
@@ -108,12 +125,7 @@ plugin-name/  # プラグインフォルダー
 
 ---
 
-## 10. CSS 単位の利用
-* WordPress コアの慣例に準拠し、`rem` を基本単位とする。  
-* `px` は微調整や境界条件に限って利用する。  
-* `em` はコンポーネント内部の相対サイズ調整に限定する。  
-
-## 11. Gutenberg ブロック仕様
+## 9. Gutenberg ブロック仕様
 
 * [ブロックエディターハンドブック](https://ja.wordpress.org/team/handbook/block-editor/) に準拠する
 * ブロックは `src/` に実装し、`register_block_type` で `dist/` 出力物を読み込む
@@ -122,7 +134,7 @@ plugin-name/  # プラグインフォルダー
 * `save` は必要に応じて実装するが、REST 経由の処理が多いため `null` 戻りが基本
 * Gutenberg 用ブロックは `block.json` を正とし、編集画面・保存処理の双方で仕様を満たすこと  
 
-## 12. Classic エディタ対応 (必要な場合)
+## 10. Classic エディタ対応 (必要な場合)
 
 * `assets/classic.js` または `src/classic.ts` に記述
 * Classic エディタ専用 UI は `add_meta_box` で提供する
@@ -130,7 +142,7 @@ plugin-name/  # プラグインフォルダー
 
 ---
 
-## 13. バージョン管理・配布
+## 11. バージョン管理・配布
 
 * `dist/` は Git 管理対象外とする
 * GitHub リポジトリは private を基本とする（OSS化時は public に切り替え）
@@ -139,7 +151,9 @@ plugin-name/  # プラグインフォルダー
 
 ---
 
-## 14. Backlog
+## 12. Backlog
+
+* 本章では、「今後の予定」を記載します。
 
 * `templates/` ディレクトリに開発テンプレート一式を配置予定
   * サンプル `vite.config.ts`
@@ -241,13 +255,13 @@ plugin-name/  # プラグインフォルダー
 1. ターミナルでリポジトリルートに移動
 2. 以下を実行してキャッシュから除外 (Git の管理対象から外す)
 
-   ```bash
+   ```zsh
    git rm --cached -r path/to/除外したいディレクトリ_or_ファイル
    ```
 3. `.gitignore` を更新 (該当パターンを追加)
 4. コミットしてプッシュ
 
-   ```bash
+   ```zsh
    git commit -m "Remove unwanted files from repo and update .gitignore"
    git push
    ```
