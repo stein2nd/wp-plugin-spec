@@ -101,9 +101,63 @@ plugin-name/  # プラグインフォルダー
 ## 6. スタイル規約
 
 * 余白・間隔 (padding, margin, blockGap 等)、テキストサイズ を rem で定義すること
-* WordPress コアの慣例に準拠し、`rem` を基本単位とする。  
-* `px` は微調整や境界条件に限って利用する。  
-* `em` はコンポーネント内部の相対サイズ調整に限定する。  
+* WordPress コアの慣例に準拠し、`rem` を基本単位とする。
+* `px` は微調整や境界条件に限って利用する。
+* `em` はコンポーネント内部の相対サイズ調整に限定する。
+
+### 6.1.W3C 仕様に準拠した主要 CSS プロパティのうち、em / rem 単位を受け付けるもの
+
+以下は、ブラウザ差異を排除し、**CSS Level 3/4 の安定仕様 (勧告・勧告候補段階)** を基準にまとめています。
+
+#### 6.1.1 🧭 em / rem が利用可能な主要 CSS プロパティ一覧 (W3C 準拠)
+
+| カテゴリ | プロパティ | 説明 | 備考 |
+| --- | --- | --- | --- |
+| **フォント関連** | `font-size` | フォントサイズを親またはルートに対して相対指定可能 | `em` / `rem` 両対応 |
+| | `letter-spacing` | 文字間隔を相対化 | 相対スケーリングに適する |
+| | `word-spacing` | 単語間隔を相対化 | |
+| | `text-indent` | 段落インデント | 相対指定で読みやすさを維持 |
+| | `line-height` | 行の高さ (単位省略時はフォントサイズ倍率) | 数値・em/rem 両対応 |
+| | `text-shadow` | 文字の影 (オフセット・ぼかし距離) | 影の距離を相対指定可 |
+| **ボックスモデル** | `margin` / `margin-*` | 外側余白を相対指定 | すべての方向で em/rem 可 |
+| | `padding` / `padding-*` | 内側余白を相対指定 | すべての方向で em/rem 可 |
+| | `border-width` / `border-*` | 枠線の太さを相対指定 | |
+| | `border-radius` | 角丸半径を相対指定 | |
+| | `outline-width` | アウトライン線の太さを相対指定 | |
+| **サイズ関連** | `width` / `height` | 要素サイズを相対化 | 文字スケール対応 UI に有用 |
+| | `min-width` / `max-width` | 最小・最大幅を相対化 | |
+| | `min-height` / `max-height` | 最小・最大高さを相対化 | |
+| **レイアウト位置** | `top` / `bottom` / `left` / `right` / `inset`  | 絶対/固定配置の位置指定 | 相対移動可 |
+| | `translate` / `transform: translate(...)` | 位置変換 | em/rem 可 (ブラウザ対応済) |
+| | `gap` / `row-gap` / `column-gap` | Flex/Grid の間隔 | em/rem 可 |
+| | `grid-template-rows` / `grid-template-columns` | セルサイズを相対指定 | |
+| | `flex-basis` | Flex 要素の初期サイズ | `%` または em/rem 併用可 |
+| **装飾・効果** | `box-shadow` | 影の距離・ぼかしを相対化 | em/rem 指定可能 |
+| | `filter: drop-shadow(...)` | 同上 (影距離) | 一部ブラウザ制限あり |
+| | `outline-offset` | アウトラインのオフセット距離 | 相対指定可 |
+| **背景・画像** | `background-position` | 背景位置 (相対指定可能だが非推奨) | `em/rem` 可 (% 推奨) |
+| | `background-size` | 背景サイズ (相対指定可能だが非推奨) | `em/rem` 可 |
+| **テーブル関連** | `border-spacing` | セル間余白 | em/rem 可 |
+| **その他** | `clip-path: inset()` | 切り抜き領域を相対指定可能 | CSS Shapes Level 1 |
+| | `mask-position`, `mask-size` | マスク位置・サイズ | em/rem 可 (CSS Masking Level 1) |
+
+#### 6.1.2 🧩 単位別の注意点
+
+| 単位 | 基準 | 主な用途 | 注意点 |
+| --- | --- | --- | --- |
+| `em` | 親要素の `font-size` | コンポーネント単位のスケーリング | ネストでサイズが累積変化する |
+| `rem` | `html` 要素の `font-size` | ページ全体の一貫スケーリング | グローバルに統一可能 |
+| `%` | コンテナの寸法 | レイアウト基準での相対指定 | フォントサイズには使えない |
+
+#### 6.1.3 📘 仕様参照 (W3C)
+
+* [CSS Values and Units Module Level 3](https://www.w3.org/TR/css-values-3/#lengths)
+* [CSS Box Model Level 3](https://www.w3.org/TR/css-box-3/)
+* [CSS Fonts Level 4](https://www.w3.org/TR/css-fonts-4/)
+* [CSS Backgrounds and Borders Level 3](https://www.w3.org/TR/css-backgrounds-3/)
+* [CSS Transforms Level 2](https://www.w3.org/TR/css-transforms-2/)
+* [CSS Grid Layout Level 2](https://www.w3.org/TR/css-grid-2/)
+* [CSS Flexible Box Layout Module Level 1](https://www.w3.org/TR/css-flexbox-1/)
 
 ---
 
