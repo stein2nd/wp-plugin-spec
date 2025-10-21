@@ -1,0 +1,38 @@
+{
+  "name": "wp-plugin-spec",
+  "version": "1.0.0",
+  "description": "本リポジトリ配下で開発する WordPress プラグインに共通する仕様",
+  "main": "README.md",
+  "scripts": {
+    "postinstall": "cd tools/docs-linter && npm install",
+    "prelint:docs": "git submodule update --remote --merge && cd tools/docs-linter && (npm ci || (rm -f package-lock.json && npm install)) && npm run build",
+    "lint:docs": "NODE_PATH=./tools/docs-linter/node_modules textlint --config ./tools/docs-linter/wordpress/.textlintrc.wp.json ./README.md ./docs/**/*.md"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/stein2nd/wp-plugin-spec.git"
+  },
+  "keywords": [
+    "wordpress",
+    "plugin",
+    "development",
+    "specification",
+    "markdown",
+    "lint",
+    "textlint",
+    "docs-linter"
+  ],
+  "author": "Koutarou ISHIKAWA",
+  "license": "GPL-2.0-or-later",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/stein2nd/wp-plugin-spec/issues"
+  },
+  "homepage": "https://github.com/stein2nd/wp-plugin-spec#readme",
+  "files": [
+    "README.md",
+    "COMMON_SPEC.md",
+    "LICENSE",
+    "tools/"
+  ]
+}
