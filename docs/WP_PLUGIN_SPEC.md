@@ -150,7 +150,7 @@ s2j-openai-lib/
 └── README.md
 ```
 
-#### **composer.json の例**
+#### **`composer.json` の例**
 
 ```json
 {
@@ -177,7 +177,7 @@ s2j-openai-lib/
 
 | 方法 | 用途 | 備考 |
 | --- | --- | --- |
-| Composer install (開発・CI 環境) | 開発・テスト・自動デプロイ時に依存を解決 | `.gitignore` に `vendor/` を含め、配布時に `vendor/` 同梱可 |
+| Composer install (開発および CI 環境) | 開発・テスト・自動デプロイ時に依存を解決 | `.gitignore` に `vendor/` を含め、配布時に `vendor/` 同梱可 |
 | vendor 同梱 | WordPress.org 公開用 | 審査基準に従い、不要ファイルを削除して最小構成に |
 | Git submodule | Composer 非対応環境 | 同期と管理に注意が必要 |
 
@@ -252,7 +252,7 @@ s2j-openai-lib/
 
 ---
 
-## 7. 管理画面仕様
+## 7. 管理画面の仕様
 
 * 設定ページは `add_options_page` または `add_menu_page` を利用
 * 設定値は `register_setting` / `get_option` / `update_option` を利用
