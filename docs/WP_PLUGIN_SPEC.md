@@ -23,17 +23,54 @@
 ```
 plugin-name/  # プラグインフォルダー
 ├─ `package.json` # ビルド設定
-├─ `SPEC.md` # プラグイン固有仕様
+├─ `readme.md`
+├─ `LICENSE`
 ├─ `vite.config.ts`
 ├─ `tsconfig.json`
-├─ `LICENSE`
-├─ `readme.md`
+├── `eslint.config.js`  # ESLint 設定
+├┬─ docs/  # 開発ドキュメント
+│└─ `SPEC.md` # プラグイン固有仕様
 ├─ plugin-name.php # プラグイン本体
 ├─ `uninstall.php` # プラグイン削除時の処理
-├─ includes/ # PHPクラス群 (REST, Settings, Admin UI)
+├┬─ languages/ # 翻訳ファイル
+│├─ `plugin-name.pot`
+│├─ `plugin-name-[ロケール名].po`
+│└─ `plugin-name-[ロケール名].mo`  # WordPress 表示用バイナリ
+├┬─ includes/ # PHPクラス群 (REST, Settings, Admin UI)
+│├─ `SettingsPage.php`  # WordPress 管理画面の HTML 構造・メニュー登録、設定サニタイゼーション
+│├─ `RestController.php`  # REST API エンドポイント定義・データ処理、権限チェック
+│└─ `BlockName.php`  # Gutenberg ブロック登録・レンダリング、ショートコード登録
 ├─ src/ # TypeScript/React/SCSS ソース
-├─ dist/ # Vite ビルド成果物 (Git管理外)
-└─ languages/ # 翻訳ファイル (.pot, .po, .mo)
+│├┬─ admin/  # 設定画面用
+││├─ `index.tsx`  # 管理画面メイン・エントリーポイント
+││├┬─ components/
+│││└─ `SettingsForm.tsx`  # 設定保存フォーム
+││├┬─ data/
+│││└─ `constants.ts`  # 定数定義
+││└┬─ utils/  # ユーティリティ
+││　└─ `errorHandler.ts`  # エラー・ハンドリング
+│├┬─ frontend/  # フロントエンド表示
+││└─ `block-name.tsx`  # ブロック・コンポーネント
+│├┬─ gutenberg/  # Gutenberg ブロック用
+││├─ `index.tsx`
+││└┬─ block-name/  # ブロック編集
+││　├─ `index.tsx`  # コンポーネント
+││　└─ `block.json`  # ブロック定義
+│├┬─ styles/  # プラグイン用のスタイル定義
+││├─ `admin.scss`  # 設定画面用
+││├─ `gutenberg.scss`  # Gutenberg ブロック用
+││├─ `frontend.scss`  # フロントエンド表示用
+││└─ `variables.scss`  # SCSS 変数定義
+│└┬─ types/  # プラグイン用のグローバル型定義
+│　├─ `index.ts`
+│　├─ `wordpress.d.ts`  # WordPress
+│　└─ `dom.d.ts`  # DOM
+└┬─ dist/ # Vite ビルド成果物 (Git管理外)
+　├┬─ blocks/
+　│└┬─ block-name/
+　│　└─ `block.json`  # ブロック定義
+　├── css/  # プラグイン用のスタイル定義
+　└── js/  # プラグイン用の Gutenberg ブロック、設定画面
 ```
 
 * プラグインフォルダー名、プラグイン本体のファイル名、テキストドメイン名は、一致する必要があります。
@@ -75,6 +112,165 @@ plugin-name/  # プラグインフォルダー
 * `npm run dev` → 開発用ビルド (watch モード)
 * `npm run lint` → ESLint + Stylelint によるコード品質チェック
 * `npm run makepot` → 翻訳テンプレート生成
+
+### 3.4. WordPress 環境での React 互換性
+
+#### 背景
+
+WordPress プラグイン開発において、React を使用する場合、以下の問題が発生する可能性があります。
+
+1. **ビルド時と実行時の React バージョン不一致**: プラグインのビルド時に使用された React のバージョンと、WordPress 環境で実行時に使用される React のバージョンが異なる場合、`React エラー #31` などの互換性エラーが発生する可能性があります。
+2. **WordPress が提供する React のバージョン**: WordPress は Gutenberg エディター用に React v18を提供していますが、プラグイン開発者はより新しいバージョンの React (例: React v19) を使用したい場合があります。
+
+#### 解決策
+
+WordPress 環境での互換性を確保するため、以下の対応を推奨します。
+
+##### 1. JSX 変換設定
+
+`tsconfig.json` の `jsx` オプションを `"react"` に設定し、JSX を `React.createElement` に変換します。
+
+```json
+{
+  "compilerOptions": {
+    "jsx": "react"
+  }
+}
+```
+
+**理由**: JSX を `React.createElement` に変換することで、実行時に WordPress が提供する React を使用できます。
+
+##### 2. WordPress の React を使用する設定
+
+実行時に WordPress が提供する React を使用するため、`wp.element` から `React` オブジェクトを構築し、グローバル変数として設定します。
+
+```typescript
+// WordPress が提供する React を使用するため、グローバル変数として設定
+const win = window as any;
+if (!win.React) {
+  const wpElement = win.wp?.element;
+  if (wpElement) {
+    // wp.element から createElement を取得して React オブジェクトを構築
+    win.React = {
+      createElement: wpElement.createElement || wpElement,
+      Fragment: wpElement.Fragment,
+      Component: wpElement.Component,
+    };
+  }
+}
+// React をグローバルスコープで使用可能にする
+var React = win.React;
+```
+
+**理由**: ビルド時に使用された React と実行時に使用される React のバージョン不一致を回避できます。
+
+##### 3. `@wordpress/element` の render 関数を使用
+
+WordPress が提供する React v18を使用するため、`@wordpress/element` の `render` 関数を使用します。
+
+```typescript
+import { render } from '@wordpress/element';
+
+function getRenderFunction(container: HTMLElement) {
+  return {
+    render: (element: React.ReactElement) => {
+      // @wordpress/element の render 関数を使用
+      // これは WordPress が提供する React v18 を使用しているため、互換性の問題がありません
+      render(element, container);
+    }
+  };
+}
+```
+
+**理由**: `@wordpress/element` の `render` 関数は、WordPress が提供する React v18を使用しているため、互換性の問題がありません。
+
+##### 4. 型定義の調整
+
+TypeScript の型定義を調整し、WordPress の React と互換性を持たせます。
+
+```typescript
+// src/types/wordpress.d.ts
+import * as ReactTypes from 'react';
+
+declare global {
+  var React: typeof ReactTypes;
+  
+  namespace React {
+    type ReactElement = ReactTypes.ReactElement;
+    type ReactNode = ReactTypes.ReactNode;
+    // WordPress の React v18 に合わせて FC の型を調整
+    type FC<P = {}> = (props: P) => ReactTypes.ReactElement | null;
+    type FunctionComponent<P = {}> = FC<P>;
+    const createElement: typeof ReactTypes.createElement;
+    const Fragment: typeof ReactTypes.Fragment;
+    const Component: typeof ReactTypes.Component;
+  }
+}
+```
+
+**理由**: TypeScript の型エラーを回避し、WordPress の React と互換性を持たせます。
+
+#### 実装例
+
+以下は、管理画面で React コンポーネントをレンダリングする実装例です。
+
+```typescript
+import { render } from '@wordpress/element';
+import { SettingsForm } from './components/SettingsForm';
+
+// WordPress が提供する React を使用するため、グローバル変数として設定
+const win = window as any;
+if (!win.React) {
+  const wpElement = win.wp?.element;
+  if (wpElement) {
+    win.React = {
+      createElement: wpElement.createElement || wpElement,
+      Fragment: wpElement.Fragment,
+      Component: wpElement.Component,
+    };
+  }
+}
+var React = win.React;
+
+// レンダリング関数
+function getRenderFunction(container: HTMLElement) {
+  return {
+    render: (element: React.ReactElement) => {
+      render(element, container);
+    }
+  };
+}
+
+// コンポーネントのレンダリング
+const container = document.getElementById('my-container');
+if (container) {
+  const root = getRenderFunction(container);
+  root.render(
+    React.createElement(SettingsForm, {
+      settings: mySettings,
+      onSave: handleSave
+    })
+  );
+}
+```
+
+#### 注意事項
+
+1. **ビルド時と実行時の React バージョン確認**: 同様の問題が発生した場合は、ビルド時に使用された React と実行時に使用される React のバージョンが一致しているか確認してください。
+2. **`@wordpress/element` の使用**: WordPress 環境では、`@wordpress/element` を使用することで互換性を保つことができます。
+3. **型定義の調整**: TypeScript を使用している場合、型定義を適切に調整する必要があります。
+4. **JSX の変換**: JSX を `React.createElement` に変換することで、実行時に WordPress が提供する React を使用できます。
+
+#### 推奨事項
+
+* **開発時**: 最新の React バージョンを使用して開発し、型安全性と最新機能を活用します。
+* **実行時**: WordPress が提供する React を使用し、互換性を確保します。
+* **ビルド設定**: `tsconfig.json` の `jsx` オプションを `"react"` に設定し、JSX を `React.createElement` に変換します。
+* **レンダリング**: `@wordpress/element` の `render` 関数を使用して、コンポーネントをレンダリングします。
+
+#### 参考実装
+
+この対応方法は、[S2J Alliance Manager](https://github.com/stein2nd/s2j-alliance-manager) プラグインで実装され、React v19.2へのアップグレード後も WordPress 環境で正常に動作することを確認しています。
 
 ---
 
