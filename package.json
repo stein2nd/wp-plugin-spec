@@ -2,15 +2,16 @@
   "name": "wp-plugin-spec",
   "version": "1.0.0",
   "description": "本リポジトリ配下で開発する WordPress プラグインに共通する仕様",
-  "main": "README.md",
-  "scripts": {
-    "postinstall": "cd tools/docs-linter && npm install",
-    "prelint:docs": "cd tools/docs-linter && git restore . && cd ../.. && git submodule update --remote --merge && cd tools/docs-linter && (npm ci || (rm -f package-lock.json && npm install)) && npm run build",
-    "lint:docs": "NODE_PATH=./tools/docs-linter/node_modules textlint --config ./tools/docs-linter/wordpress/.textlintrc.wp.json ./README.md ./docs/**/*.md"
-  },
+  "type": "module",
+  "author": "Koutarou ISHIKAWA",
+  "license": "GPL-2.0-or-later",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/stein2nd/wp-plugin-spec.git"
+  },
+  "homepage": "https://github.com/stein2nd/wp-plugin-spec#readme",
+  "bugs": {
+    "url": "https://github.com/stein2nd/wp-plugin-spec/issues"
   },
   "keywords": [
     "wordpress",
@@ -22,17 +23,16 @@
     "textlint",
     "docs-linter"
   ],
-  "author": "Koutarou ISHIKAWA",
-  "license": "GPL-2.0-or-later",
-  "type": "module",
-  "bugs": {
-    "url": "https://github.com/stein2nd/wp-plugin-spec/issues"
-  },
-  "homepage": "https://github.com/stein2nd/wp-plugin-spec#readme",
   "files": [
     "README.md",
     "COMMON_SPEC.md",
     "LICENSE",
     "tools/"
-  ]
+  ],
+  "main": "README.md",
+  "scripts": {
+    "postinstall": "cd tools/docs-linter && npm install",
+    "prelint:docs": "cd tools/docs-linter && git restore . && cd ../.. && git submodule update --remote --merge && cd tools/docs-linter && (npm ci || (rm -f package-lock.json && npm install)) && npm run build && cd node_modules/textlint-rule-preset-wp-docs-ja && (npm install || true) && (test -f vite.config.ts || test -f vite.config.js) && npm run build || true && cd ../../..",
+    "lint:docs": "NODE_PATH=./tools/docs-linter/node_modules textlint --config ./tools/docs-linter/presets/wordpress/.textlintrc.wp.json ./README.md ./docs/**/*.md"
+  }
 }
