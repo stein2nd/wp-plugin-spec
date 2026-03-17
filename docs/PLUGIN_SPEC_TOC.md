@@ -15,7 +15,7 @@
 
 1. `SPEC_OVERVIEW.md` - プロジェクトの存在理由
 2. `SPEC_ARCHITECTURE.md` - コード構造と責務
-3. `PLUGIN_SPEC_UI_API_DATA_TEMPLATE.md` - 小〜中規模プラグイン向けに、下記3ファイルをまとめたもの
+3. `SPEC_UI_API_DATA_TEMPLATE.md` - 小〜中規模プラグイン向けに、下記3ファイルをまとめたもの
   1. `SPEC_UI_AND_FLOWS.md` - 管理画面、フロント UI と画面遷移
   2. `SPEC_API_AND_INTEGRATION.md` - REST API および外部サービス連携
   3. `SPEC_DATA_DICTIONARY.md` - データ、設定値、ストレージ定義
