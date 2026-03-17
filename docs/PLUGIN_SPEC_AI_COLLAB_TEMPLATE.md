@@ -21,7 +21,7 @@
 * 本ガイドラインは必須ではなく、「SPEC を唯一の正典としつつ AI を活用する開発スタイル」を推進するための補助ルールと考えてください。
 
 * SPEC の正典:
-  * 共通: `WP_PLUGIN_SPEC.md`
+  * 共通: `docs/WP_PLUGIN_SPEC.md`
   * プラグイン固有:
     * `docs/SPEC_OVERVIEW.md`
     * `docs/SPEC_ARCHITECTURE.md`
@@ -48,7 +48,7 @@
 
   * 各機能あるいはモジュール単位で、標準プロンプト定型テンプレート (ひな型) をチームで決めておいてください。
   * Prompt に「参照すべき SPEC のセクション」「設計規範を指定するファイル名 (例: CLAUDE.md)」「禁止事項・注意事項」などを明示してください。
-   * 例: 「WP_PLUGIN_SPEC.md Appendix B § B.2に従って、このブロックの保存処理を TypeScript で実装してください。」
+   * 例: 「WP_PLUGIN_SPEC.md Appendix A § B.3に従って、このブロックの保存処理を TypeScript で実装してください。」
 
 5. **AI 生成と手動修正の境界を設ける**
 
@@ -118,22 +118,29 @@
 - WordPress プラグインハンドブック/コーディング規約
 - 関連するドキュメント/コードリポジトリ
 
-### 2.2. 実装タスク用
+### 2.2. 実装依頼テンプレ (参照すべき仕様セット + 前提条件)
+
+実装タスクを AI に依頼する際は、次のように **参照すべき仕様を事前にセットで指定** するのがおすすめです。  
+また、実装時に守るべき前提条件 (セキュリティ等) をセットで宣言しておくと、AI の逸脱が減ります。
 
 ```text
-以下の仕様と規約に従って、コードを生成してください。
+以下の仕様と前提条件に従って、コードを生成してください。
 
-* WP_PLUGIN_SPEC.md
-* docs/SPEC_OVERVIEW.md
-* docs/SPEC_ARCHITECTURE.md
-* docs/SPEC_UI_API_DATA.md の「1. 画面仕様 (UI) とフロー / 画面 ID: XXX」
-* docs/SPEC_DATA_DICTIONARY.md の該当セクション
-* docs/SPEC_AI_COLLAB.md
+- docs/WP_PLUGIN_SPEC.md
+- docs/SPEC.md
+- docs/SPEC_OVERVIEW.md
+- docs/SPEC_ARCHITECTURE.md
+- docs/SPEC_UI_AND_FLOWS.md の「<画面/フローの該当セクション>」
+- docs/SPEC_API_AND_INTEGRATION.md の「<該当エンドポイント>」(必要な場合)
+- docs/SPEC_DATA_DICTIONARY.md の「<該当スキーマ (options/meta/table)>」
+- docs/SPEC_AI_COLLAB.md の「3. 運用ルール」
 
 前提:
-* WordPress コーディング規約に準拠してください。
-* Nonce チェックと権限チェックを、必ず実装してください。
+- WordPress コーディング規約に準拠してください。
+- Nonce チェックと権限チェックを、必ず実装してください。
 ```
+
+このように、「**共通仕様 (WP_PLUGIN_SPEC) + プラグイン固有仕様群**」を AI に束ねて渡すことで、**誤読を減らしつつ、分割された仕様の恩恵 (見通し・保守性) を保つ** ことができます。
 
 ### 2.3. レビュー/リファクタリング用
 
@@ -144,7 +151,7 @@
   * includes/RestController.php
 
 参照仕様:
-* WP_PLUGIN_SPEC.md
+* docs/WP_PLUGIN_SPEC.md
 * docs/SPEC_ARCHITECTURE.md
 * docs/SPEC_API_AND_INTEGRATION.md
 * docs/SPEC_DATA_DICTIONARY.md
