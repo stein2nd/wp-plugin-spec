@@ -59,7 +59,7 @@
 
 * `assets/classic.js` または `src/classic.ts` に記述。
 * Classic エディター専用 UI は `add_meta_box` で提供する。
-* Classic Editor 用ショートコードは **補助互換レイヤー** として実装し、プライマリ仕様はブロックに置く。  
+* Classic Editor 用ショートコードは **補助互換レイヤ** として実装し、プライマリ仕様はブロックに置く。  
 
 ---
 
