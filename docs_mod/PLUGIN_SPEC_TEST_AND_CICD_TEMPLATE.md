@@ -70,13 +70,13 @@
 
 現ファイルの Swift 特有部分を削除し、次の章立てへ置き換えるのを推奨します。
 
-### 4.1. 「環境」章を WP/Node 前提へ
+### 4.1.「環境」章を WP/Node 前提へ
 
 * Node のセットアップ (`actions/setup-node@v4`、キャッシュ有効化)
 * PHP のセットアップ (`shivammathur/setup-php@v2`)
 * Composer を使う場合は `composer install --no-interaction --prefer-dist`
 
-### 4.2. 「成果物」章を Zip 配布へ
+### 4.2.「成果物」章を Zip 配布へ
 
 * GitHub リポジトリは private を基本とする (OSS 化時は public に切り替え)。
 * リリースは GitHub Release + Zip Export で配布可能とする。
@@ -84,7 +84,7 @@
 * `vendor/` を同梱するかは配布先 (WordPress.org / GitHub Releases / クライアント納品) で方針を分ける。
 * バージョン番号は Semantic Versioning (SemVer) に準拠。
 
-### 4.3. 「テスト」章を二言語 (PHP + JS) で定義
+### 4.3.「テスト」章を二言語 (PHP + JS) で定義
 
 * PHP:
   * `php -l` (任意)
@@ -96,7 +96,7 @@
   * `npm run build:production`
   * (任意) `npm test` (Jest/Vitest)
 
-### 4.4. 「キャッシュ」章を Node/Composer へ
+### 4.4.「キャッシュ」章を Node/Composer へ
 
 * Node: npm キャッシュ
 * Composer: vendor キャッシュ (プロジェクト規模による)
