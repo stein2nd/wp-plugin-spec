@@ -1,4 +1,4 @@
-# COMMON_SPEC_CICD.md (Swift/SwiftUI プロジェクト向け共通仕様｜CI/CD workflow)
+# COMMON_SPEC_CICD.md (Swift/SwiftUI プロジェクト向け共通仕様｜ CI/CD workflow)
 
 ## 目的
 
