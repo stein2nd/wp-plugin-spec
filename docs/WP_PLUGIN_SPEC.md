@@ -27,9 +27,9 @@
    1. `SPEC_UI_AND_FLOWS.md` - 管理画面、フロント UI と画面遷移
    2. `SPEC_API_AND_INTEGRATION.md` - REST API および外部サービス連携
    3. `SPEC_DATA_DICTIONARY.md` - データ、設定値、ストレージ定義
-6. `SPEC_I18N_AND_A11Y.md` - 国際化/アクセシビリティ
-7. `SPEC_TEST_AND_CICD.md` - テスト戦略、CI/CD
-8. `SPEC_AI_COLLAB.md` - AI 伴走開発ルール
+4. `SPEC_I18N_AND_A11Y.md` - 国際化/アクセシビリティ
+5. `SPEC_TEST_AND_CICD.md` - テスト戦略、CI/CD
+6. `SPEC_AI_COLLAB.md` - AI 伴走開発ルール
 
 > テンプレートは、本リポジトリの `docs/PLUGIN_SPEC_*_TEMPLATE.md` を参照してください。
 
