@@ -26,13 +26,11 @@
   "files": [
     "README.md",
     "COMMON_SPEC.md",
-    "LICENSE",
-    "tools/"
+    "LICENSE"
   ],
   "main": "README.md",
   "scripts": {
-    "lint:docs": "NODE_PATH=./node_modules textlint --config ./.textlintrc.json ./README.md ./docs/**/*.md ./docs_mod/**/*.md",
-    "lint:docs_compat": "NODE_PATH=./node_modules textlint --config ./.textlintrc.json ./README.md ./docs/**/*.md ./docs_mod/**/*.md"
+    "lint:docs": "s2j-docs-linter ./README.md ./docs/**/*.md"
   },
   "devDependencies": {
     "@s2j/docs-linter": "^1.0.10"
