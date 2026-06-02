@@ -33,6 +33,6 @@
     "lint:docs": "s2j-docs-linter ./README.md ./docs/**/*.md ./docs_mod/**/*.md"
   },
   "devDependencies": {
-    "@s2j/docs-linter": "^1.0.11"
+    "@s2j/docs-linter": "^1.0.15"
   }
 }
