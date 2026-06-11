@@ -1,10 +1,10 @@
 {
   "name": "wp-plugin-spec",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "本リポジトリ配下で開発する WordPress プラグインに共通する仕様",
   "type": "module",
   "author": "Koutarou ISHIKAWA",
-  "license": "GPL-2.0-or-later",
+  "license": "GPL-3.0-or-later",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/stein2nd/wp-plugin-spec.git"
@@ -30,9 +30,9 @@
   ],
   "main": "README.md",
   "scripts": {
-    "lint:docs": "s2j-docs-linter ./README.md ./docs/**/*.md ./docs_mod/**/*.md"
+    "lint:docs": "s2j-docs-linter ./README.md ./CHANGELOG.md ./docs/**/*.md ./docs_mod/**/*.md"
   },
   "devDependencies": {
-    "@s2j/docs-linter": "^1.0.15"
+    "@s2j/docs-linter": "^1.0.18"
   }
 }

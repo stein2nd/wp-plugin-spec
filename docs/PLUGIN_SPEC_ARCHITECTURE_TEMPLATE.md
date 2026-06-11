@@ -128,7 +128,7 @@ plugin-name/  # プラグインフォルダー
 | **API キー管理** | API キーや設定値は「外部注入」する (例: `setApiKey()` や DI)。ライブラリ内部で保持しない。 |
 | **WordPress 依存の排除** | 可能な限り `add_action`・`get_option` など WordPress 依存コードを含めず、**純粋な PHP ライブラリ**とする。 |
 | **例外処理** | OpenAI や外部 API 呼び出し時は例外を throw し、呼び出し元プラグインが処理を制御できるようにする。 |
-| **ライセンス整合性** | GPL 互換 (例: GPL v2以降/MIT/Apache v2.0) を遵守。 |
+| **ライセンス整合性** | GPL 互換 (例: GPL v3以降/MIT/Apache v2.0) を遵守。 |
 | **バージョニング** | `semver` (Semantic Versioning) に従い、破壊的変更はメジャーバージョンで管理。 |
 
 #### **パッケージ例構成**
@@ -152,7 +152,7 @@ s2j-openai-lib/
   "name": "stein2nd/s2j-openai-lib",
   "description": "Reusable OpenAI integration library for S2J WordPress plugins.",
   "type": "library",
-  "license": "GPL-2.0-or-later",
+  "license": "GPL-3.0-or-later",
   "autoload": {
     "psr-4": {
       "S2J\\OpenAI\\": "src/"
