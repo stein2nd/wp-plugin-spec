@@ -1,6 +1,6 @@
 {
   "name": "wp-plugin-spec",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "本リポジトリ配下で開発する WordPress プラグインに共通する仕様",
   "type": "module",
   "author": "Koutarou ISHIKAWA",
@@ -33,6 +33,9 @@
     "lint:docs": "s2j-docs-linter ./README.md ./CHANGELOG.md ./docs/**/*.md ./docs_mod/**/*.md"
   },
   "devDependencies": {
-    "@s2j/docs-linter": "^1.0.21"
+    "@s2j/docs-linter": "^1.0.22"
+  },
+  "allowScripts": {
+    "@s2j/docs-linter": true
   }
 }

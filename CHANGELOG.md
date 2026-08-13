@@ -2,6 +2,12 @@
 
 ## unreleased
 
+## 2.0.1 - 2026-08-13
+
+* `@s2j/docs-linter` を v1.0.22に更新
+* npm v12向けに `.npmrc` を追加 (`allow-git=all` / `legacy-peer-deps=true`)
+* `@s2j/docs-linter` の install スクリプトを `allowScripts` で許可
+
 ## 2.0.0 - 2026-06-11
 
 ### Breaking
