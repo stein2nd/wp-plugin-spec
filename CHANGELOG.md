@@ -2,6 +2,12 @@
 
 ## unreleased
 
+## 2.0.2 - 2026-08-17
+
+* ドメインを純関数、I/O をアダプタとする設計方針を共通仕様に反映。
+* 公開正本のファイル名を `SPECS.md` / `CICD.md` / `*_TEMPLATE.md` に整理。
+* 旧正本を `docs/archive/adapter-and-pure-domain/` に freeze。
+
 ## 2.0.1 - 2026-08-13
 
 * `@s2j/docs-linter` を v1.0.22に更新
