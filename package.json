@@ -1,6 +1,6 @@
 {
   "name": "wp-plugin-spec",
-  "version": "2.0.2",
+  "version": "2.0.3",
   "description": "本リポジトリ配下で開発する WordPress プラグインに共通する仕様",
   "type": "module",
   "author": "Koutarou ISHIKAWA",
