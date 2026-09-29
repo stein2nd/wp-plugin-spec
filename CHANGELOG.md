@@ -2,6 +2,10 @@
 
 ## unreleased
 
+## 2.0.4 - 2026-09-29
+
+* `@s2j/docs-linter` を v1.0.25に更新
+
 ## 2.0.3 - 2026-08-17
 
 * `README.md` を Xcode Common Specs と同じ構成に拡充 (Description / 技術スタック / 開発ルール / コーディング規約 / 詳細な仕様 / License)。既存のバッジは維持。
