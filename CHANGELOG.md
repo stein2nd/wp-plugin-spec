@@ -2,6 +2,11 @@
 
 ## unreleased
 
+## 2.0.5 - 2026-10-03
+
+* `@s2j/docs-linter` を v1.0.26に更新
+* VS Code 設定を `json.schemaDownload.enable` に切り替え (`npm.enableScriptExplorer` を置き換え)
+
 ## 2.0.4 - 2026-09-29
 
 * `@s2j/docs-linter` を v1.0.25に更新
