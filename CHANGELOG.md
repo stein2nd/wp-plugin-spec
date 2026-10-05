@@ -2,6 +2,11 @@
 
 ## unreleased
 
+## 2.0.6 - 2026-10-05
+
+* `@s2j/docs-linter` を v1.0.27に更新
+* freeze した旧テンプレートの Markdown 表を GFM 記法にそろえた
+
 ## 2.0.5 - 2026-10-03
 
 * `@s2j/docs-linter` を v1.0.26に更新
