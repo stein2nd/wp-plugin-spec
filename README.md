@@ -3,11 +3,11 @@
 [![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0.en.html)
 [![WordPress](https://img.shields.io/badge/WordPress-6.9+-blue.svg)](https://wordpress.org/)
 
-本リポジトリは、WordPress や Cursor などでプラグインを開発するうえでの **共通仕様** を定義するドキュメント・リポジトリです。
+本リポジトリは、WordPress や Cursor などで **プラグイン** および対になる **Composer ライブラリ** を開発するうえでの **共通仕様** を定義するドキュメント・リポジトリです。
 
 ## Description
 
-本リポジトリ配下で開発する WordPress プラグインにおいて、「AI 伴走開発」を行う際の共通仕様・ルールを定義します。
+本リポジトリ配下で開発する WordPress プラグイン (および純ドメインの Composer ライブラリ) において、「AI 伴走開発」を行う際の共通仕様・ルールを定義します。
 
 ## 1. 技術スタック
 
@@ -45,9 +45,11 @@
 * [`docs/I18N_AND_A11Y_TEMPLATE.md`](./docs/I18N_AND_A11Y_TEMPLATE.md) — 国際化 / アクセシビリティ (ひな型)
 * [`docs/TEST_AND_CICD_TEMPLATE.md`](./docs/TEST_AND_CICD_TEMPLATE.md) — テスト / CI/CD (ひな型)
 * [`docs/AI_COLLAB_TEMPLATE.md`](./docs/AI_COLLAB_TEMPLATE.md) — AI 伴走開発ルール (ひな型)
+* [`docs/DOCUMENTATION_GOVERNANCE_TEMPLATE.md`](./docs/DOCUMENTATION_GOVERNANCE_TEMPLATE.md) — ドキュメント整合、archive 運用 (ひな型。製品では `docs/governance/documentation_governance.md`)
 * [`docs/CICD.md`](./docs/CICD.md) — CI/CD
+* [`docs/archive/README.md`](./docs/archive/README.md) — 凍結スナップショットの索引
 
-旧正本は、[`docs/archive/adapter-and-pure-domain/`](./docs/archive/adapter-and-pure-domain/) に freeze しています。
+旧正本・イニシアチブ証跡は、[`docs/archive/`](./docs/archive/) に freeze します。
 
 ## License
 

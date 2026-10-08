@@ -1,7 +1,8 @@
 # wp-plugin-spec - 共通仕様
 
-* 本ドキュメントは、本リポジトリ配下で開発する WordPress プラグインに共通する仕様を定義する。
-* 各プラグインごとの個別仕様は、各リポジトリ内の `SPEC.md` および `docs/SPEC_*.md` に記載する。
+* 本ドキュメントは、本リポジトリ配下で開発する **WordPress プラグイン** および、それと対になる **Composer ライブラリ** (純ドメイン / 計算サービス) に共通する仕様・ドキュメント運用を定義する。
+* 各プロダクトの個別仕様は、各リポジトリ内の `docs/` (および起草中の `docs_mod/`) に記載する。
+* Composer ライブラリでは WordPress API、管理画面、i18n アダプタは持たないが、`docs_mod` → `docs` → `docs/archive` のライフサイクルとガバナンスは同じ型を使う。
 
 ## 1. 準拠ドキュメント
 
@@ -106,6 +107,7 @@ CLI の実行単位は、プラグインでは下記に読み替えます。Pres
 4. `SPEC_I18N_AND_A11Y.md` - 国際化/アクセシビリティ
 5. `SPEC_TEST_AND_CICD.md` - テスト戦略、CI/CD
 6. `SPEC_AI_COLLAB.md` - AI 伴走開発ルール
+7. `docs/governance/documentation_governance.md` (任意〜推奨) - ドキュメント整合、archive 運用。ひな型は `DOCUMENTATION_GOVERNANCE_TEMPLATE.md`
 
 ひな型は、本リポジトリの `docs/*_TEMPLATE.md` を参照してください。
 
@@ -144,21 +146,60 @@ WordPress のプラグイン / テーマでは、国際化関数を介して「�
 
 | 種別 | 場所 |
 | --- | --- |
-| 草案 | `./docs_mod/` |
+| 草案・進行中イニシアチブ証跡 | `./docs_mod/` |
 | 公開正本 (確定後) | `./docs/` |
-| freeze した旧正本 | `./docs/archive/<initiative>/` |
+| 凍結スナップショット | `./docs/archive/` (索引は `docs/archive/README.md`) |
 
 1. 草案: `./docs_mod/` で編集する。
-2. 確定: 現行の `./docs/*.md` があれば `./docs/archive/<initiative>/` に移動して freeze する。
-3. 公開正本: 編集確定版を `./docs/` に移動する。
+2. 確定: 合意した内容を `./docs/` に反映する (公開正本)。
+3. 大きなリライトで現行正本を置き換える場合: 旧正本を `./docs/archive/spec-<slug>/` (または簡潔な英文名) に移動して freeze する。
+4. 実装・改修イニシアチブ完了時: 証跡三点を `./docs/archive/impl-<slug>/` または `./docs/archive/mod-<slug>/` に freeze する (§4.5)。
 
-* `<initiative>` は、initiative ごとに適切な、簡潔な英文名のサブフォルダーとする (例: `adapter-and-pure-domain`)。
 * 小さな typo 程度なら、草案は起こさなくてよい。公開正本を直接直してよい。
 * `*_TEMPLATE.md` はひな型である。typo 以外のリライトは archive 対象とする。ひな型の日常利用 (コピー先での記入) は archive しない。
+* 製品リポジトリでは、整合ルールと archive 詳細を `docs/governance/documentation_governance.md` に置くことを推奨する (ひな型: `DOCUMENTATION_GOVERNANCE_TEMPLATE.md`)。`docs/archive/README.md` は索引であり、規則の正本にはしない。
 
-### 4.4. テスト結果は仕様ライフサイクルの対象外
+### 4.4. テスト結果・カバレッジ成果物は仕様ライフサイクルの対象外
 
-`docs/test-results.md` は **生成物** です。CI (または同等のテストランナー) が書き、人が読みます。手編集の草案と同じ流れに乗せません。
+* ルートまたは `docs/` 直下の機械生成 `test-results` / カバレッジ HTML、XML は **生成物** です。CI (または同等のテストランナー) が書き、人が読みます。手編集の草案と同じ流れに乗せません。
+* イニシアチブ証跡の `docs/archive/.../test-results.md` は人が書く合格サマリーであり、PHPUnit 生ログの丸貼りではない (§4.5)。
+* Composer ライブラリでは、カバレッジ HTML 等を `/coverage/` (gitignore) に置く例がある。仕様、archive には混ぜない。
+
+### 4.5. イニシアチブ証跡 (archive)
+
+完了した実装・改修の **凍結スナップショット** を `docs/archive/` に残す。WordPress プラグインと Composer ライブラリで同じ型とする。
+
+#### 命名
+
+| 種類 | フォルダー | いつ使うか |
+| --- | --- | --- |
+| 実装イニシアチブ | `docs/archive/impl-<slug>/` | まだない能力を初めて入れる |
+| 改修イニシアチブ | `docs/archive/mod-<slug>/` | すでに `docs/` にある仕様・振る舞いを変える |
+| 仕様リライトの旧正本 | `docs/archive/spec-<slug>/` または簡潔な英文名 | 公開正本の一式を置き換えたときの旧版 freeze (例: `adapter-and-pure-domain`) |
+
+`<slug>` は短い kebab-case。SemVer はフォルダー名に入れず、`status.md` や CHANGELOG に書く。
+
+#### 三点セット (impl / mod)
+
+作業中は `docs_mod/` に置き、完了時に archive へフリーズする。
+
+| ファイル | 書くこと | 書かないこと |
+| --- | --- | --- |
+| `modification.md` | 目的、スコープ内外、タスク表、完了定義 | 長い仕様本文 (正本は `docs/`) |
+| `status.md` | 進捗サマリー、完了条件のチェック、残ギャップ | 生のカバレッジ HTML |
+| `test-results.md` | 仕様条件 ID ごとの PASS / WARN / FAIL | PHPUnit 生ログの丸貼り |
+
+#### ライフサイクル (要約)
+
+1. **開始** … `docs_mod/` に三点セット (必要なら仕様ドラフトも)
+2. **作業** … 合意した仕様は都度 `docs/` へ。証跡三点は `docs_mod/` で更新
+3. **フリーズ** … 該当 `docs/` が最新、`test-results.md` に FAIL なし (WARN は理由付きのみ可)、CHANGELOG unreleased に一行 → `docs/archive/impl|mod-<slug>/` へコピーして固定
+4. **フリーズ後** … archive 配下は原則変更しない。続きは新しい `mod-*` / `impl-*`
+5. **片付け** … `docs_mod/` の三点は削除してよい (`docs_mod/` と README は残す)
+
+docs だけの整備は archive 任意。コードまたは契約が動くイニシアチブでは三点セットを切る。
+
+索引・一覧表の置き場は各リポジトリの `docs/archive/README.md` とする。規則の正本は `docs/governance/documentation_governance.md` (または本節とひな型)。
 
 ## 5. テスト
 

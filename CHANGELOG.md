@@ -2,6 +2,11 @@
 
 ## unreleased
 
+## 2.0.9 - 2026-10-08
+
+* ドキュメント・ライフサイクルにイニシアチブ証跡 (`impl-` / `mod-`) と `docs/archive/README.md` を追加
+* 製品向け `DOCUMENTATION_GOVERNANCE_TEMPLATE.md` を追加し、WordPress プラグインと Composer ライブラリの双方を対象と明記
+
 ## 2.0.8 - 2026-10-08
 
 * 仕様文では「日本語を表示」ではなく「適切なメッセージ文を表示」と書く規約を、`SPECS.md` / `I18N_AND_A11Y_TEMPLATE.md` / `AI_COLLAB_TEMPLATE.md` に追記した
