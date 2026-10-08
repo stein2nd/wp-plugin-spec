@@ -2,6 +2,11 @@
 
 ## unreleased
 
+## 2.0.8 - 2026-10-08
+
+* 仕様文では「日本語を表示」ではなく「適切なメッセージ文を表示」と書く規約を、`SPECS.md` / `I18N_AND_A11Y_TEMPLATE.md` / `AI_COLLAB_TEMPLATE.md` に追記した
+* `TEST_AND_CICD_TEMPLATE.md` の「Unit Test」を「ユニットテスト」に表記統一
+
 ## 2.0.7 - 2026-10-08
 
 * 仕様書・テンプレートの表記を統一 (「以下」→「下記」、「ときに」→「際に」など)。freeze 済みアーカイブも含む
