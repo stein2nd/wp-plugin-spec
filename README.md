@@ -37,7 +37,7 @@
 
 ## 4. 詳細な仕様
 
-詳細は、[`docs/SPECS.md`](./docs/SPECS.md) を参照してください。関連する別紙は、次のとおりです。
+詳細は、[`docs/SPECS.md`](./docs/SPECS.md) を参照してください。関連する別紙は、下記のとおりです。
 
 * [`docs/OVERVIEW_TEMPLATE.md`](./docs/OVERVIEW_TEMPLATE.md) — プロジェクトの存在理由 (ひな型)
 * [`docs/ARCHITECTURE_TEMPLATE.md`](./docs/ARCHITECTURE_TEMPLATE.md) — コード構造と責務 (ひな型)

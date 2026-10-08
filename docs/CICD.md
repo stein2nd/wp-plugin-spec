@@ -56,7 +56,7 @@
 
 1. **`lint-js`**: `npm ci`、ESLint / Stylelint、`tsc --noEmit`、本番ビルド
 2. **`lint-php`**: PHP 構文、PHPCS (WPCS)
-3. **`test-phpunit`**: ドメインを優先。WP 依存は環境があるときだけ
+3. **`test-phpunit`**: ドメインを優先。WP 依存は環境がある場合だけ
 4. **`write-test-results`** (推奨): `docs/test-results.md` を生成
 
 推奨構成 (ベスト・プラクティス) は、下記を足します。
