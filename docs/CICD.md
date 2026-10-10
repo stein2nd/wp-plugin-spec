@@ -135,7 +135,7 @@
 ### 6.4. `e2e`
 
 * Playwright を標準とする
-* 起動方法 (`wp-env` / Docker / Local) はプラグインごとに `SPEC_TEST_AND_CICD.md` へ
+* 起動方法 (`wp-env` / Docker / Local) はプラグインごとに `SPEC_TEST_AND_CICD.md` に
 * 環境依存で実行できない場合は SKIP。条件未達を許容する場合は WARN (理由と期限必須)
 
 ### 6.5. `release`

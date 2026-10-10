@@ -55,7 +55,7 @@
 
   * 各機能あるいはモジュール単位で、標準プロンプト定型テンプレート (ひな型) をチームで決めておくこと。
   * Prompt に「参照すべき SPEC のセクション」「設計規範を指定するファイル名 (例: CLAUDE.md)」「禁止事項・注意事項」などを明示すること。
-  * 例として、「SPECS.md の設計方針と SPEC_ARCHITECTURE.md に従って、このブロックの保存処理を TypeScript で実装してください。判断は `utils/` の純関数へ出してください。」
+  * 例として、「SPECS.md の設計方針と SPEC_ARCHITECTURE.md に従って、このブロックの保存処理を TypeScript で実装してください。判断は `utils/` の純関数に出してください。」
 
 4. **AI 生成と手動修正の境界を、設ける**
 
@@ -178,7 +178,7 @@
   * 先に SPEC (上記ファイル群) の該当箇所を更新 → その上で実装を AI に依頼する。
 * バグ修正時:
   * SPEC と実装どちらが正しいかを検討 → 必要に応じて SPEC を更新 → その上で修正する。
-* 小さな typo の仕様修正は `docs_mod` 草案を起こさなくてよい。リライトは草案経由とし、旧正本は `docs/archive/<initiative>/` へ freeze する。
+* 小さな typo の仕様修正は `docs_mod` 草案を起こさなくてよい。リライトは草案経由とし、旧正本は `docs/archive/<initiative>/` に freeze する。
 
 ### 3.1. Cursor / ChatGPT / Claude の活用ルール
 

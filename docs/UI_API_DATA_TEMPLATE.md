@@ -22,7 +22,7 @@ React / REST / Settings は、アダプタです。判断は、純関数です�
 * 設定ページは `add_options_page` または `add_menu_page` を使う (PHP アダプタ)。
 * 読み書きは `register_setting` / `get_option` / `update_option` をアダプタで行う。
 * `sanitize_callback`、Nonce、capability は必須。
-* バリデーションと判断は純関数へ出す。コンポーネントに混ぜない。
+* バリデーションと判断は純関数に出す。コンポーネントに混ぜない。
 * 余白・テキストサイズは `rem` を基本とする。詳細は `SPECS.md` のスタイル規約。
 
 ### 1.1. 管理画面の一覧
@@ -56,7 +56,7 @@ React / REST / Settings は、アダプタです。判断は、純関数です�
 ## 2. REST API と外部連携
 
 * パスは `/plugin-slug/v1/...` を基本とする。
-* REST クラスはアダプタ。判断は `includes/domain/` へ。
+* REST クラスはアダプタ。判断は `includes/domain/` に。
 * `permission_callback` と Nonce は必須。
 * エラー系は HTTP ステータスとエラーコードを書く。`WP_Error` を握りつぶさない。
 
@@ -107,4 +107,4 @@ React / REST / Settings は、アダプタです。判断は、純関数です�
 
 * 本ファイルを1本渡して、画面 ID またはエンドポイント単位で実装を依頼する。
 * 前提に「REST / 設定画面はアダプタ、判断は純関数、巨大サービスは使わない」を含める。
-* 本ファイルが長くなったら、分割版3ファイルへ移し、本ファイルは目次だけ残す。
+* 本ファイルが長くなったら、分割版3ファイルに移し、本ファイルは目次だけ残す。

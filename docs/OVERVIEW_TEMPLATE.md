@@ -94,7 +94,7 @@
   * `vite.config.ts` を用いて IIFE 形式でバンドルする
   * JavaScript は WordPress 同梱の jQuery を利用可能とする (外部 import 不要) (`jQuery(function($) { ... })`)
   * CSS も IIFE 出力し、エディター用・フロント用を区別すること
-* 出力は `./dist` (Git 管理外。リリース時に Zip へ同梱)
+* 出力は `./dist` (Git 管理外。リリース時に Zip に同梱)
 
 ### 3.3. `package.json` の `scripts`
 
@@ -118,7 +118,7 @@
 ## 5. AI 伴走開発の観点メモ (任意)
 
 * このプラグインで AI に特に気を付けてほしい点:
-  * 例として、「文言は必ず i18n 関数を通すこと」「セキュリティチェックを絶対にスキップしないこと」「判断は純関数、WordPress API はアダプタへ」
+  * 例として、「文言は必ず i18n 関数を通すこと」「セキュリティチェックを絶対にスキップしないこと」「判断は純関数、WordPress API はアダプタに」
 * AI に渡す際に、必ず一緒に読ませたいドキュメント:
   * `SPECS.md` (設計方針を含む)
   * `SPEC_ARCHITECTURE.md`

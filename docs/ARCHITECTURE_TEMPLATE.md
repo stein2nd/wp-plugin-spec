@@ -42,7 +42,7 @@ plugin-name/  # プラグインフォルダー
 │└─ `plugin-name-[ロケール名].mo`  # WordPress 表示用バイナリ
 ├┬─ includes/ # PHP。アダプタクラスとドメイン
 │├─ `SettingsPage.php`  # アダプタ: 管理画面の HTML 構造・メニュー登録、設定サニタイゼーション
-│├─ `RestController.php`  # アダプタ: REST エンドポイント定義、権限チェック。判断は domain へ委譲
+│├─ `RestController.php`  # アダプタ: REST エンドポイント定義、権限チェック。判断は domain に委譲
 │├─ `BlockName.php`  # アダプタ: Gutenberg ブロック登録・レンダリング、ショートコード登録
 │└┬─ domain/  # 純関数とイミュータブルな値 (WordPress API を呼ばない)
 │　└─ `slug.php`  # 例: 正規化・バリデーション
@@ -115,7 +115,7 @@ plugin-name/  # プラグインフォルダー
 * **ESLint ルール準拠**:
   * WordPress コーディング規約に準拠する。
 * **コンポーネント分割**:
-  * 単一責任の原則にもとづいて設計する。React は UI アダプタとし、ドメイン判断は `utils/` の純関数へ出す。
+  * 単一責任の原則にもとづいて設計する。React は UI アダプタとし、ドメイン判断は `utils/` の純関数に出す。
 * **カスタムフック活用**:
   * 「ロジックの再利用性」向上を考慮する。フック内に WordPress REST 呼び出しとドメイン判断を混ぜない。
 
@@ -147,7 +147,7 @@ plugin-name/  # プラグインフォルダー
 | **ロード方法** | PSR-4オートロードを使用。`require_once` ベースではなく、`composer autoload` を推奨。 |
 | **API キー管理** | API キーや設定値は「外部注入」する (例: コンストラクタ引数)。ライブラリ内部で保持しない。DI コンテナは採用しない。 |
 | **WordPress 依存の排除** | 可能な限り `add_action`・`get_option` など WordPress 依存コードを含めず、**純粋な PHP ライブラリ**とする。WP 向け配線はプラグイン側のアダプタが行う。 |
-| **例外処理** | OpenAI や外部 API 呼び出し時は例外を throw し、呼び出し元プラグイン (アダプタ) が `WP_Error` / HTTP / notice へ変換する。 |
+| **例外処理** | OpenAI や外部 API 呼び出し時は例外を throw し、呼び出し元プラグイン (アダプタ) が `WP_Error` / HTTP / notice に変換する。 |
 | **ライセンス整合性** | GPL 互換 (例: GPL v3以降/MIT/Apache v2.0) を遵守。 |
 | **バージョニング** | `semver` (Semantic Versioning) に従い、破壊的変更はメジャーバージョンで管理。 |
 
