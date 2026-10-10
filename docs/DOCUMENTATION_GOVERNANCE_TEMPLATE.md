@@ -61,7 +61,7 @@
 | --- | --- | --- |
 | 実装イニシアチブ | `docs/archive/impl-<slug>/` | まだない能力を初めて入れる |
 | 改修イニシアチブ | `docs/archive/mod-<slug>/` | すでに `docs/` にある仕様・振る舞いを変える |
-| 仕様リライトの旧正本 | `docs/archive/spec-<slug>/` または簡潔な英文名 | 公開正本の一式を置き換えたときの旧版 |
+| 仕様リライトの旧正本 | `docs/archive/spec-<slug>/` または簡潔な英文名 | 公開正本の一式を置き換えた場合の旧版 |
 
 `<slug>` は短い kebab-case。SemVer はフォルダー名に入れない。
 

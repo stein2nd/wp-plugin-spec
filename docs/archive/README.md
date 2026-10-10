@@ -2,7 +2,7 @@
 
 本フォルダーは、次の2種を置く。
 
-1. **仕様リライトの旧正本** — 公開正本の一式を置き換えたときの freeze
+1. **仕様リライトの旧正本** — 公開正本の一式を置き換えた場合の freeze
 2. **完了した実装・改修イニシアチブの証跡** — `impl-<slug>/` / `mod-<slug>/` の三点セット
 
 規則の正本は [../SPECS.md](../SPECS.md) §4.3〜§4.5と、製品向けひな型 [../DOCUMENTATION_GOVERNANCE_TEMPLATE.md](../DOCUMENTATION_GOVERNANCE_TEMPLATE.md) である。製品リポジトリではコピー先の `docs/governance/documentation_governance.md` を正とする。
