@@ -47,6 +47,7 @@
 * [`docs/AI_COLLAB_TEMPLATE.md`](./docs/AI_COLLAB_TEMPLATE.md) — AI 伴走開発ルール (ひな型)
 * [`docs/DOCUMENTATION_GOVERNANCE_TEMPLATE.md`](./docs/DOCUMENTATION_GOVERNANCE_TEMPLATE.md) — ドキュメント整合、archive 運用 (ひな型。製品では `docs/governance/documentation_governance.md`)
 * [`docs/CICD.md`](./docs/CICD.md) — CI/CD
+* [`docs/SMOKE_AND_WP_ENVIRONMENTS.md`](./docs/SMOKE_AND_WP_ENVIRONMENTS.md) — スモークと WordPress 環境 (Local / Studio / PHPUnit)
 * [`docs/archive/README.md`](./docs/archive/README.md) — 凍結スナップショットの索引
 
 旧正本・イニシアチブ証跡は、[`docs/archive/`](./docs/archive/) に freeze します。

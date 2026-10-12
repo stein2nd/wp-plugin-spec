@@ -228,6 +228,12 @@ docs だけの整備は archive 任意。コードまたは契約が動くイニ
 * ESLint / `tsc`
 * Playwright: 管理画面・ブロック。環境依存は SKIP または WARN の主戦場とする
 
+### 5.3. スモークと WordPress 環境 (Local / Studio / PHPUnit)
+
+* **Local** を日常開発と段階1のスモークに、**WordPress Studio (Blueprints)** を段階2の再現可能な検証サイトに、**PHPUnit (テスト専用 DB)** を段階3の自動テストに使う構成を推奨する。
+* Docker / wp-env は CI 用としてよい。ローカル開発で Docker を必須にしない。
+* 環境の役割分担の正本は [`SMOKE_AND_WP_ENVIRONMENTS.md`](./SMOKE_AND_WP_ENVIRONMENTS.md)。各プラグインの手順と結果は `./docs/test-results.md` に書く。
+
 ## 6. スタイル規約
 
 ### 6.1. W3C 仕様に準拠した主要 CSS プロパティのうち、em / rem 単位を受け付けるもの

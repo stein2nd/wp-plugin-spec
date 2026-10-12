@@ -20,6 +20,8 @@
 
 ジョブ名・結果マーク・生成物の共通契約は、`docs/CICD.md` を正とします。本ファイルには、このプラグイン固有のバージョン、導入済みツール、WP テスト環境の有無を書きます。結果マークと生成物の扱いは、`docs/SPECS.md` の「5. テスト」を正とします。
 
+Local (日常スモーク)、WordPress Studio (Blueprint 検証)、PHPUnit (テスト DB) の役割は、共通正本 [`SMOKE_AND_WP_ENVIRONMENTS.md`](./SMOKE_AND_WP_ENVIRONMENTS.md) に従います。
+
 ## 1. 目的
 
 * PR 時点で **最低限の品質保証 (Lint / Static Analysis / ユニットテスト / Build)** を自動化し、レビュー負荷と不具合混入を減らす。
@@ -101,7 +103,7 @@
 * PHP バージョン:
 * Composer の有無:
 * PHPCS / PHPUnit / PHPStan の導入状況:
-* WP テスト環境の有無と起動方法:
+* WP テスト環境の有無と起動方法 (Local / Studio / PHPUnit / wp-env のどれを使うか):
 * Playwright の有無と起動方法:
 * `docs/test-results.md` を Git 管理するか:
 * `vendor/` を Zip に同梱するか:

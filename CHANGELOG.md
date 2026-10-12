@@ -2,6 +2,12 @@
 
 ## unreleased
 
+## 2.0.12 - 2026-10-12
+
+### Added
+
+* `docs/SMOKE_AND_WP_ENVIRONMENTS.md` — Local (段階1) / WordPress Studio (段階2) / PHPUnit (段階3) の環境役割を共通定義。`SPECS.md` §5.3、`TEST_AND_CICD_TEMPLATE.md` から参照
+
 ## 2.0.11 - 2026-10-10
 
 * 仕様書・テンプレートの表記を統一 (「〜へ」→「〜に」、archive / i18n 説明の助詞など)。freeze 済みアーカイブ1件も含む
