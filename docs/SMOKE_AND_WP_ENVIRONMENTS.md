@@ -55,7 +55,10 @@ Local と Studio は **代替関係ではなく併用** です (Local = 日常�
 
 ## 4. 参考実装
 
-* [s2j-media-library-date-corrector](https://github.com/stein2nd/s2j-media-library-date-corrector) — `docs/test-results.md`、`studio/README.md`、PHPUnit、`test:unit:php:local` / `test:unit:php` (CI)
+* [s2j-media-library-date-corrector](https://github.com/stein2nd/s2j-media-library-date-corrector) `docs/test-results.md` で結果記録
+    * 段階1: `tests/smoke-local.sh` (`npm run test:smoke:local`)
+    * 段階2: `studio/smoke-test-blueprint.json`
+    * 段階3: PHPUnit + CI
 
 ## 5. 関連ドキュメント
 

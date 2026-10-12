@@ -7,6 +7,7 @@
 ### Added
 
 * `docs/SMOKE_AND_WP_ENVIRONMENTS.md` — Local (段階1) / WordPress Studio (段階2) / PHPUnit (段階3) の環境役割を共通定義。`SPECS.md` §5.3、`TEST_AND_CICD_TEMPLATE.md` から参照
+* 参考実装: s2j-media-library-date-corrector の `tests/smoke-local.sh` と `studio/smoke-test-blueprint.json`
 
 ## 2.0.11 - 2026-10-10
 
