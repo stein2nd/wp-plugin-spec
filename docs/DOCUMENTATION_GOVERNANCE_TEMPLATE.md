@@ -38,6 +38,7 @@
 
 * `@s2j/docs-linter` を使う場合は SoT とし、ローカルと CI で同じ `npm run lint:docs` を使う。
 * 対象は `README.md` と仕様 Markdown である (製品の `package.json` に合わせる)。
+* **公式 id アンカー (機械向け):** `docs/status.md` 等の見出し `{#status-…}` は小文字 kebab-case。見出し属性 `{#…}` は `@s2j/docs-linter` base プリセット allowlist (`/\{#[^}]+\}/`) で PRH 対象外。リンク側 `#status-…` は製品 `.textlintrc` に `/#status-[a-z0-9-]+/` 等を足す (WordPress プリセット昇格可)。
 
 ## 4. 分割ルール
 

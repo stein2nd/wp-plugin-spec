@@ -2,6 +2,13 @@
 
 ## unreleased
 
+## 2.0.13 - 2026-10-15
+
+### Changed
+
+* `@s2j/docs-linter` を v1.0.29に更新
+* `DOCUMENTATION_GOVERNANCE_TEMPLATE.md` に公式 id アンカー (`{#…}`) の lint 運用を追記
+
 ## 2.0.12 - 2026-10-12
 
 ### Added
