@@ -2,6 +2,19 @@
 
 ## unreleased
 
+## 2.0.14 - 2026-10-16
+
+### Added
+
+* `docs/PHP_CODING_STANDARDS.md` — プラグインは `includes/` を PSR-12、ルート bootstrap を WPCS。`composer phpcbf` (PSR-12) のみ `includes/`。Composer ライブラリは WPCS 非適用
+* `docs/PHPUNIT_LOCAL.md` — wp-env なし Local PHPUnit (テスト専用 DB、`.env.tests`)
+* `tools/php-quality/` — PHPCS / PHPStan 設定ひな型と `apply-*` スクリプト (npm `lint:php` 等)
+
+### Changed
+
+* `SPECS.md` §2.7 / §5.3、`CICD.md` §6.2、`TEST_AND_CICD_TEMPLATE.md`、`SMOKE_AND_WP_ENVIRONMENTS.md`、`README.md` を上記に整合
+* `PHPUNIT_LOCAL.md` の表記を docs-linter 向けに調整
+
 ## 2.0.13 - 2026-10-15
 
 ### Changed

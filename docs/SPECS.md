@@ -89,6 +89,11 @@ CLI の実行単位は、プラグインでは下記に読み替えます。Pres
 * テーマ / プラグイン同士の連携は、Composer より先に、存在チェックとフックで行う。
 * 配布 Zip に `vendor/` を同梱するかは、WordPress.org / 社内配布 / GitHub Releases で分岐する。詳細は `ARCHITECTURE_TEMPLATE.md` の Composer 節を参照する。
 
+### 2.7. PHP コーディング規約 (プラグイン vs Composer ライブラリ)
+
+* **WordPress プラグイン** — `includes/` (名前空間アダプタ) は **PSR-12** (`phpcs.xml.dist`)。プラグインルートの `{slug}.php` / `uninstall.php` 等は **WPCS** (`phpcs.wpcs.xml.dist`)。**WPCS の PHPCBF を `includes/` に当てない。** スタイル修正は **`composer phpcbf` (PSR-12標準) のみ** `includes/` 向け。詳細は [`PHP_CODING_STANDARDS.md`](./PHP_CODING_STANDARDS.md)。
+* **Composer ライブラリ** — **WPCS は適用しない**。PSR-12 (または当該リポジトリの PHP-FIG 系ルール) + PHPUnit / PHPStan を正とする。
+
 ## 3. 仕様書の分割ガイド (AI 伴走開発向け)
 
 本リポジトリでは、**1つの巨大な `SPEC.md` に集約せず、AI 伴走開発に最適化された粒度で仕様を分割** することを推奨します。  

@@ -29,7 +29,8 @@
 
 ## 3. コーディング規約
 
-* PHP は、[WordPress コーディング規約](https://ja.wordpress.org/team/handbook/coding-standards/) (PHPCS / WPCS) に準拠する。
+* **WordPress プラグイン** — `includes/` は **PSR-12**、プラグインルートの bootstrap PHP は [WordPress コーディング規約](https://ja.wordpress.org/team/handbook/coding-standards/) (WPCS)。PHPCBF は PSR-12のみ `includes/` に当てる。詳細は [`docs/PHP_CODING_STANDARDS.md`](./docs/PHP_CODING_STANDARDS.md)。
+* **Composer ライブラリ** — WPCS は使わず **PSR-12** を正とする。
 * TypeScript は、`strict: true` とし、ESLint で検査する。
 * アダプタは `includes/` に、ドメインの純関数は `includes/domain/` に置く。
 * React は UI アダプタとし、ドメイン判断は `utils/` の純関数に出す。
@@ -46,6 +47,7 @@
 * [`docs/TEST_AND_CICD_TEMPLATE.md`](./docs/TEST_AND_CICD_TEMPLATE.md) — テスト / CI/CD (ひな型)
 * [`docs/AI_COLLAB_TEMPLATE.md`](./docs/AI_COLLAB_TEMPLATE.md) — AI 伴走開発ルール (ひな型)
 * [`docs/DOCUMENTATION_GOVERNANCE_TEMPLATE.md`](./docs/DOCUMENTATION_GOVERNANCE_TEMPLATE.md) — ドキュメント整合、archive 運用 (ひな型。製品では `docs/governance/documentation_governance.md`)
+* [`docs/PHP_CODING_STANDARDS.md`](./docs/PHP_CODING_STANDARDS.md) — PHP / PHPCS / PHPCBF (プラグイン vs ライブラリ)
 * [`docs/CICD.md`](./docs/CICD.md) — CI/CD
 * [`docs/SMOKE_AND_WP_ENVIRONMENTS.md`](./docs/SMOKE_AND_WP_ENVIRONMENTS.md) — スモークと WordPress 環境 (Local / Studio / PHPUnit)
 * [`docs/PHPUNIT_LOCAL.md`](./docs/PHPUNIT_LOCAL.md) — PHPUnit (wp-env なし / Local + テスト専用 DB)

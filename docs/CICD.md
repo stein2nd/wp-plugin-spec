@@ -124,7 +124,13 @@
 ### 6.2. `lint-php`
 
 * `php -l` (任意)
-* `vendor/bin/phpcs` (WPCS)。未導入なら PENDING (自動) とし、導入期限を Backlog に書く
+* **WordPress プラグイン** — [`PHP_CODING_STANDARDS.md`](./PHP_CODING_STANDARDS.md) に従い、通常は次をまとめて実行する。
+  * PHPStan (導入済みなら)
+  * PHPCS **PSR-12** — 対象 `includes/` (`phpcs.xml.dist`)
+  * PHPCS **WPCS** — プラグインルートの bootstrap PHP のみ (`phpcs.wpcs.xml.dist`。`includes/` は exclude)
+* **Composer ライブラリ** — WPCS は走らせない。PSR-12 + PHPStan / PHPUnit を正とする。
+* 未導入なら PENDING (自動) とし、導入期限を Backlog に書く。
+* ローカルでのスタイル自動修正は **`composer phpcbf` (PSR-12)** を `includes/` に限定する。**WPCS 用 PHPCBF を `includes/` に当てない** (タブ / スペース衝突)。
 
 ### 6.3. `test-phpunit`
 
@@ -152,7 +158,7 @@
 | ツール | 検査対象 | 実行タイミング |
 | --- | --- | --- |
 | Docs Linter (`@s2j/docs-linter`) | ドキュメントの表記 | PR 時 |
-| PHPCS (WPCS) | PHP 規約 | PR 時 |
+| PHPCS (PSR-12 + WPCS、プラグインのみ) | PHP 規約。`includes/` は PSR-12、ルート bootstrap は WPCS。ライブラリは PSR-12のみ | PR 時 |
 | PHPStan / Psalm | PHP 静的解析 | PR 時 (導入済みなら) |
 | ESLint / Stylelint / `tsc` | JS/TS/CSS | PR 時 |
 | PHPUnit | ドメイン純関数、薄いアダプタ試験 | PR 時 |
@@ -199,7 +205,8 @@ jobs:
       - run: composer --version || true
       # composer を使うなら:
       # - run: composer install --no-interaction --prefer-dist
-      # - run: vendor/bin/phpcs
+      # - run: composer lint:php
+      #   (例: phpstan + phpcs PSR-12 on includes/ + phpcs WPCS on plugin root)
 
   test-phpunit:
     runs-on: ubuntu-latest

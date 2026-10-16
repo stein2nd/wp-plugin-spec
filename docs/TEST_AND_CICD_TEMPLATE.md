@@ -70,8 +70,11 @@ Local (日常スモーク)、WordPress Studio (Blueprint 検証)、PHPUnit (テ�
 ### 4.1. 最小構成 (ベター・プラクティス)
 
 * **`lint-php`**
-  * PHP 構文チェック
-  * PHPCS (WPCS もしくは WP コーディング規約準拠のルール)
+  * PHP 構文チェック (任意)
+  * PHPStan (導入済みなら)
+  * PHPCS **PSR-12** — `includes/` (`phpcs.xml.dist`)
+  * PHPCS **WPCS** — プラグインルートのみ (`phpcs.wpcs.xml.dist`。`includes/` exclude)
+  * 運用の正本: [`PHP_CODING_STANDARDS.md`](./PHP_CODING_STANDARDS.md) (スタイル修正は `composer phpcbf` PSR-12のみ `includes/`。WPCS PHPCBF を `includes/` に当てない)
 * **`lint-js`**
   * `npm ci`
   * TypeScript 型チェック (`tsc --noEmit` 等)
@@ -102,7 +105,7 @@ Local (日常スモーク)、WordPress Studio (Blueprint 検証)、PHPUnit (テ�
 * Node バージョン:
 * PHP バージョン:
 * Composer の有無:
-* PHPCS / PHPUnit / PHPStan の導入状況:
+* PHPCS / PHPUnit / PHPStan の導入状況 (`phpcs.xml.dist` / `phpcs.wpcs.xml.dist` の有無、`composer phpcbf` の引数):
 * WP テスト環境の有無と起動方法 (Local / Studio / PHPUnit / wp-env のどれを使うか):
 * Playwright の有無と起動方法:
 * `docs/test-results.md` を Git 管理するか:

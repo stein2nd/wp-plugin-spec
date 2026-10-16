@@ -13,7 +13,7 @@
 | テスト DB | **別名** の専用 DB のみ (推奨: `wordpress_test`)。統合テストはここに書き込む |
 | 取得物 | リポジトリ内 `tests/.wordpress` (コア)、`tests/.wordpress-tests-lib` (PHPUnit lib)。gitignore |
 
-統合テスト (`WP_UnitTestCase`) は post 作成、meta 更新、REST など **DB に副作用** があります。接続先 DB 名を開発サイトと同一にしないこと。実装では `WP_TESTS_DB_NAME=local` を **拒否** するスクリプトを推奨します (参考実装参照)。
+統合テスト (`WP_UnitTestCase`) は post 作成、meta 更新、REST など **DB に副作用** があります (接続先 DB 名を開発サイトと同一にしないこと)。実装では `WP_TESTS_DB_NAME=local` を **拒否** するスクリプトを推奨します (参考実装を参照)。
 
 ユニットテスト (WordPress bootstrap なし) は **DB 不要** です。ドメイン純関数を `phpunit.unit.xml.dist` 等で分離します ([`SPECS.md`](./SPECS.md) §5)。
 
@@ -36,7 +36,7 @@
 mysql --version
 ```
 
-Local の MySQL へ接続できること (socket または TCP。`.env.tests` と一致):
+Local の MySQL に接続できること (socket または TCP。`.env.tests` と一致):
 
 ```bash
 mysql --user=root --password='***' --socket='/Users/<you>/Library/Application Support/Local/run/<site-id>/mysql/mysqld.sock' --execute='SELECT 1;'
@@ -73,7 +73,7 @@ Local アプリ → 対象サイト → **Database**:
 | Host | `localhost` | socket 利用時も WP 形式で `localhost` |
 | Socket | `…/Local/run/<site-id>/mysql/mysqld.sock` | `WP_TESTS_DB_HOST` (下記) |
 
-`<site-id>` は Local がサイトごとに発行する識別子。**公開資料では `<site-id>` とマスク** し、実パスは `.env.tests` (gitignore) のみ。
+`<site-id>` は Local がサイトごとに発行する識別子です。**公開資料では `<site-id>` とマスク** し、実パスは `.env.tests` (gitignore) のみです。
 
 #### Socket パス
 
@@ -82,7 +82,7 @@ Local アプリ → 対象サイト → **Database**:
 
 #### `.env.tests` (gitignore)
 
-テンプレート `.env.tests.example` をコピーし、**コミットしない**。
+テンプレート `.env.tests.example` をコピーし、**コミットしません**。
 
 WordPress の `DB_HOST` 形式: **`localhost:` + socket 絶対パス**。空白 (`Application Support`) があるため **ダブルクオート** で囲む。
 
@@ -93,7 +93,7 @@ WP_TESTS_DB_PASSWORD=root
 WP_TESTS_DB_HOST="localhost:/Users/<you>/Library/Application Support/Local/run/<site-id>/mysql/mysqld.sock"
 ```
 
-TCP のみの場合は `WP_TESTS_DB_HOST=localhost` でもよい。
+TCP のみの場合は、`WP_TESTS_DB_HOST=localhost` でもかまいません。
 
 ## 3. 推奨リポジトリ構成
 
@@ -111,7 +111,7 @@ TCP のみの場合は `WP_TESTS_DB_HOST=localhost` でもよい。
 | `bin/phpunit-local.sh` | ローカル runner (ユニット → 統合) |
 | `bin/phpunit-ci.sh` | wp-env コンテナ内 runner |
 
-`WP_VERSION=latest` では、WordPress.org API で得た **同一リリース** のコア tarball と SVN `tags/x.y.z` の PHPUnit lib をそろえる (core と trunk tests の不一致を避ける)。
+`WP_VERSION=latest` では、WordPress.org API で得た **同一リリース** のコア tarball と SVN `tags/x.y.z` の PHPUnit lib をそろえます (core と trunk tests の不一致を避ける)。
 
 ### 3.1. npm / Composer スクリプト (例)
 
@@ -142,11 +142,11 @@ npm run test:unit:php:local        # または composer test:all
 | `svn: command not found` | Subversion を PATH に追加 |
 | 開発 DB を汚したくない | `WP_TESTS_DB_NAME` を `local` にしない。ユニットのみ実行 |
 
-`wordpress_test` は Local の Database ツールから DROP してよい (次回 install で再作成)。
+`wordpress_test` は、Local の Database ツールから DROP してかまいません (次回 install で再作成)。
 
 ## 6. 関連
 
 * [`SMOKE_AND_WP_ENVIRONMENTS.md`](./SMOKE_AND_WP_ENVIRONMENTS.md) — Local / Studio / PHPUnit の役割
-* [`SPECS.md`](./SPECS.md) §5 — テスト、結果マーク
+* [`SPECS.md`](./SPECS.md) §5 (テスト、結果マーク)
 * [`TEST_AND_CICD_TEMPLATE.md`](./TEST_AND_CICD_TEMPLATE.md) — プラグイン固有 CI
 * [`CICD.md`](./CICD.md) — 共通 CI
