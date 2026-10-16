@@ -232,7 +232,8 @@ docs だけの整備は archive 任意。コードまたは契約が動くイニ
 
 * **Local** を日常開発と段階1のスモークに、**WordPress Studio (Blueprints)** を段階2の再現可能な検証サイトに、**PHPUnit (テスト専用 DB)** を段階3の自動テストに使う構成を推奨する。
 * Docker / wp-env は CI 用としてよい。ローカル開発で Docker を必須にしない。
-* 環境の役割分担の正本は [`SMOKE_AND_WP_ENVIRONMENTS.md`](./SMOKE_AND_WP_ENVIRONMENTS.md)。各プラグインの手順と結果は `./docs/test-results.md` に書く。
+* 環境の役割分担の正本は [`SMOKE_AND_WP_ENVIRONMENTS.md`](./SMOKE_AND_WP_ENVIRONMENTS.md)。**wp-env なし** の Local PHPUnit 手順 (MySQL、`svn`、`.env.tests`) は [`PHPUNIT_LOCAL.md`](./PHPUNIT_LOCAL.md)。
+* 各プラグインの件数、npm スクリプト、結果は `./docs/test-results.md` に書く。
 
 ## 6. スタイル規約
 

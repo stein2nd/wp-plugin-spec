@@ -43,7 +43,7 @@ Local と Studio は **代替関係ではなく併用** です (Local = 日常�
 ### 2.3. PHPUnit (段階3)
 
 * **役割:** `WP_UnitTestCase` による単体・統合テスト。**テスト専用 MySQL** を使用する ([ユニットテスト handbook](https://developer.wordpress.org/apis/handbook/configuring-unit-tests/))。
-* **ローカル:** Local の Database 接続情報を使って `install-wp-tests.sh` を走らせても、対象は **テスト用 DB 名** に限定する。
+* **ローカル (wp-env なし):** Local の MySQL (user / password / socket) に接続し、**テスト用 DB 名** (`wordpress_test` 等) のみを使う。開発サイト DB (`local` 等) には書き込まない。手順の正本は [`PHPUNIT_LOCAL.md`](./PHPUNIT_LOCAL.md) (`svn` / MySQL クライアント、`.env.tests`、下準備)。
 * **CI:** wp-env / Docker で PHPUnit を回す。開発者 PC に Docker がなくてよい。
 
 ## 3. 各プラグインへの落とし込み
@@ -55,13 +55,14 @@ Local と Studio は **代替関係ではなく併用** です (Local = 日常�
 
 ## 4. 参考実装
 
-* [s2j-media-library-date-corrector](https://github.com/stein2nd/s2j-media-library-date-corrector) `docs/test-results.md` で結果記録
-    * 段階1: `tests/smoke-local.sh` (`npm run test:smoke:local`)
+* [s2j-media-library-date-corrector](https://github.com/stein2nd/s2j-media-library-date-corrector)
+    * 段階1: `tests/smoke-local.sh` (`npm run test:smoke:local`)。結果: `docs/test-results.md`
     * 段階2: `studio/smoke-test-blueprint.json`
-    * 段階3: PHPUnit + CI
+    * 段階3: [`PHPUNIT_LOCAL.md`](./PHPUNIT_LOCAL.md) 準拠 (`bin/phpunit-local.sh`、`.env.tests`)、CI は wp-env
 
 ## 5. 関連ドキュメント
 
 * [`SPECS.md`](./SPECS.md) §5 - テスト
+* [`PHPUNIT_LOCAL.md`](./PHPUNIT_LOCAL.md) - wp-env なし Local PHPUnit
 * [`CICD.md`](./CICD.md)
 * [`TEST_AND_CICD_TEMPLATE.md`](./TEST_AND_CICD_TEMPLATE.md)

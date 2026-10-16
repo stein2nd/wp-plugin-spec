@@ -20,7 +20,7 @@
 
 ジョブ名・結果マーク・生成物の共通契約は、`docs/CICD.md` を正とします。本ファイルには、このプラグイン固有のバージョン、導入済みツール、WP テスト環境の有無を書きます。結果マークと生成物の扱いは、`docs/SPECS.md` の「5. テスト」を正とします。
 
-Local (日常スモーク)、WordPress Studio (Blueprint 検証)、PHPUnit (テスト DB) の役割は、共通正本 [`SMOKE_AND_WP_ENVIRONMENTS.md`](./SMOKE_AND_WP_ENVIRONMENTS.md) に従います。
+Local (日常スモーク)、WordPress Studio (Blueprint 検証)、PHPUnit (テスト DB) の役割は、共通正本 [`SMOKE_AND_WP_ENVIRONMENTS.md`](./SMOKE_AND_WP_ENVIRONMENTS.md) に従います。ローカルで Docker なし PHPUnit を回す下準備と `.env.tests` は [`PHPUNIT_LOCAL.md`](./PHPUNIT_LOCAL.md) を正とします。
 
 ## 1. 目的
 
