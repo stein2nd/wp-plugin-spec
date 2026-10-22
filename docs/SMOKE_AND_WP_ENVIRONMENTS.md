@@ -6,13 +6,13 @@
 
 ## 1. 3つの環境を区別する
 
+A は「人が触る WordPress」。C は **開発用サイトの DB を直接書き換えない** 別系統です。
+
 | 層 | 何を用意するか | 典型ツール |
 | --- | --- | --- |
 | **A. 実 WordPress サイト** | 本体、PHP、DB、プラグイン配置 | Local、WordPress Studio |
 | **B. スモークの自動実行** | 有効化、WP-CLI、HTTP、ログ | WP-CLI スクリプト (任意) |
 | **C. PHPUnit / CI** | テストライブラリ、**テスト専用 DB** | PHPUnit、`install-wp-tests.sh`、GitHub Actions + wp-env |
-
-A は「人が触る WordPress」。C は **開発用サイトの DB を直接書き換えない** 別系統です。
 
 ## 2. 段階的導入 (推奨)
 
@@ -22,7 +22,9 @@ A は「人が触る WordPress」。C は **開発用サイトの DB を直接�
 | **2** | 同じ構成の検証サイトを繰り返し用意 | **WordPress Studio** + Blueprints | `studio wp …`、Blueprint からサイト生成 |
 | **3** | PHP / REST / DB 連携、PR ゲート | **PHPUnit** + CI | `composer test`、`npm run test:unit:php` (wp-env) |
 
-段階1と2はスモーク (サイト上の動作)。段階3は PHPUnit (テスト DB)。Playwright 等の E2E は、UI 変更が多いプラグインで段階1の補完として追加します (`TEST_AND_CICD_TEMPLATE.md`)。
+段階1と2はスモーク (サイト上の動作) テストで、段階3は PHPUnit (テスト DB) とします。
+
+Playwright 等の E2E は、UI 変更が多いプラグインで段階1の補完として追加します (`TEST_AND_CICD_TEMPLATE.md`)。
 
 ドメイン純関数は WordPress なしで PHPUnit する構成を優先します (`SPECS.md` §5、`CICD.md`)。
 
@@ -34,11 +36,11 @@ A は「人が触る WordPress」。C は **開発用サイトの DB を直接�
 
 ### 2.2. WordPress Studio (段階2)
 
+Local と Studio は **代替関係ではなく併用** です (Local = 日常、Studio = 検証工場)。
+
 * **役割:** **クリーンな再現用** 検証サイト。Local 開発サイトを汚さず、バージョン差や依存プラグイン同梱を固定する。
 * **向いていること:** [Blueprints](https://developer.wordpress.com/docs/developer-tools/studio/blueprints/) で構成を JSON 化、[Studio CLI](https://developer.wordpress.com/docs/developer-tools/studio/cli/) で操作をスクリプト化。
 * **配置の目安:** 各プラグインリポジトリの `studio/` (Blueprint JSON と README)。
-
-Local と Studio は **代替関係ではなく併用** です (Local = 日常、Studio = 検証工場)。
 
 ### 2.3. PHPUnit (段階3)
 

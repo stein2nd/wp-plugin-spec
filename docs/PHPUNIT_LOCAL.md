@@ -124,15 +124,17 @@ TCP のみの場合は、`WP_TESTS_DB_HOST=localhost` でもかまいません�
 
 ## 4. 推奨フロー (ローカル)
 
+初回は `Using WordPress x.y.z for core and test library.` のあと `tests/.wordpress*` が作成され、統合テストが走ります。
+
 ```bash
 composer install
 cp .env.tests.example .env.tests   # 編集
 npm run test:unit:php:local        # または composer test:all
 ```
 
-初回は `Using WordPress x.y.z for core and test library.` のあと `tests/.wordpress*` が作成され、統合テストが走ります。
-
 ## 5. トラブルシューティング
+
+`wordpress_test` は、Local の Database ツールから DROP してかまいません (次回 install で再作成)。
 
 | 症状 | 対処 |
 | --- | --- |
@@ -141,8 +143,6 @@ npm run test:unit:php:local        # または composer test:all
 | `Interface "WP_Secrets_Store" not found` 等 | コアとテスト lib のバージョン不一致。`rm -rf tests/.wordpress tests/.wordpress-tests-lib` 後に再実行 |
 | `svn: command not found` | Subversion を PATH に追加 |
 | 開発 DB を汚したくない | `WP_TESTS_DB_NAME` を `local` にしない。ユニットのみ実行 |
-
-`wordpress_test` は、Local の Database ツールから DROP してかまいません (次回 install で再作成)。
 
 ## 6. 関連
 

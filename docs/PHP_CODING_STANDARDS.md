@@ -6,11 +6,11 @@
 
 ## 1. なぜ二系統か
 
-名前空間付きアダプタ (`includes/`) は `PSR-4` クラス、4スペースインデント、`PSR-12` にそろえる。
+名前空間付きアダプタ (`includes/`) は `PSR-4` クラス、4スペースインデント、`PSR-12` にそろえます。
 
-一方、プラグイン本体の bootstrap (`{slug}.php`、`uninstall.php` 等) は WordPress コーディング規約 (WPCS) の手順的 PHP に近い。
+一方、プラグイン本体の bootstrap (`{slug}.php`、`uninstall.php` 等) は WordPress コーディング規約 (WPCS) の手順的 PHP に近いものになります。
 
-**PSR-12と WPCS を同一ディレクトリに同時適用すると、インデント (スペース vs タブ) やファイル名規則が衝突する。** そのためプラグインでは **ルールセットをパスで分ける**。
+**PSR-12と WPCS を同一ディレクトリに同時適用すると、インデント (スペース vs タブ) やファイル名規則が衝突します。** そのためプラグインでは **ルールセットをパスで分けます**。
 
 ## 2. WordPress プラグイン (推奨レイアウト)
 
@@ -20,6 +20,8 @@
 | プラグインルートの手続き PHP | **WPCS** | `phpcs.wpcs.xml.dist` | `{plugin-slug}.php`、`uninstall.php` 等。**`includes/` は exclude** |
 
 ### 2.1. Composer scripts (例)
+
+`phpcs` のデフォルト standard は `phpcs.xml.dist` (PSR-12) に置きます。WPCS は `--standard=phpcs.wpcs.xml.dist` で明示します。
 
 ```json
 "scripts": {
@@ -31,11 +33,9 @@
 }
 ```
 
-`phpcs` のデフォルト standard は `phpcs.xml.dist` (PSR-12) に置く。WPCS は `--standard=phpcs.wpcs.xml.dist` で明示する。
-
 ### 2.2. 自動修正 (PHPCBF) — 重要
 
-スタイルを直すときは **PSR-12用の PHPCBF だけ** を `includes/` に当てる。
+スタイルを直すときは **PSR-12用の PHPCBF だけ** を `includes/` に当てます。
 
 ```bash
 composer phpcbf
@@ -44,13 +44,13 @@ composer phpcbf
 
 **WPCS 用の `phpcbf` を `includes/` に実行しない。**
 
-WPCS はタブインデント等を適用し、PSR-12の「スペースのみインデント」と衝突する。両方当てると `Generic.WhiteSpace.DisallowTabIndent` 等が再発する。
+WPCS はタブインデント等を適用し、PSR-12の「スペースのみインデント」と衝突します。両方当てると `Generic.WhiteSpace.DisallowTabIndent` 等が再発します。
 
-WPCS 側の手直しが必要なときは、**ルートの bootstrap PHP のみ** `phpcs.wpcs.xml.dist` 対象に限定して修正する。
+WPCS 側の手直しが必要なときは、**ルートの bootstrap PHP のみ** `phpcs.wpcs.xml.dist` 対象に限定して修正します。
 
 ### 2.3. `PSR-1` メソッド名 (snake_case)
 
-WordPress フックコールバック (`array( self::class, 'save_post_handler' )` 等) では **snake_case メソッド名** を使ってよい。PSR-12設定で `PSR1.Methods.CamelCapsMethodName.NotCamelCaps` を exclude する例がある (S2J 系プラグイン)。
+WordPress フックコールバック (`array( self::class, 'save_post_handler' )` 等) では **snake_case メソッド名** を使ってよい。PSR-12設定で `PSR1.Methods.CamelCapsMethodName.NotCamelCaps` を exclude する例があります (S2J 系プラグイン)。
 
 ### 2.4. 静的解析 (PHPStan)
 
@@ -59,14 +59,14 @@ WordPress フックコールバック (`array( self::class, 'save_post_handler' 
 
 ## 3. Composer ライブラリ
 
+プラグインが `vendor/` 経由でライブラリを取り込む場合、ライブラリ側のスタイルは PSR-12で統一し、プラグイン側 WPCS とは混ぜません。
+
 | 項目 | 方針 |
 | --- | --- |
 | WPCS | **導入しない** (WordPress スタブも本番コードに不要なら最小限) |
 | PHPCS | **PSR-12** のみ (1ルールセットでよい) |
 | PHPCBF | 同上 standard で `src/` 等 |
 | ドメイン | 純 PHP。副作用はリポジトリ境界のテストダブルに閉じる |
-
-プラグインが `vendor/` 経由でライブラリを取り込む場合、ライブラリ側のスタイルは PSR-12で統一し、プラグイン側 WPCS とは混ぜない。
 
 ## 4. 各プラグインの `SPEC_TEST_AND_CICD.md` に書くこと
 

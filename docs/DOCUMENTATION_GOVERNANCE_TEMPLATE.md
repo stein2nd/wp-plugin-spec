@@ -1,7 +1,3 @@
-<!--
-目的：「ドキュメント整合・archive 運用」の明文化 (WordPress プラグイン / Composer ライブラリ共通)
--->
-
 # wp-plugin-spec - ドキュメンテーション・ガバナンス (ひな型)
 
 * 各プロダクトリポジトリの `docs/governance/documentation_governance.md` にコピーして利用することを想定する。
@@ -17,6 +13,8 @@
 
 ## 1. Source of Truth
 
+矛盾時は **規則・契約の正本** を直し、README、要約、usage を追随させます。
+
 | 対象 | 正本 (例。製品に合わせて書き換える) |
 | --- | --- |
 | ドメイン規則 / 計算 | Composer: `docs/core/`。プラグイン単体: `docs/` 内の該当 SPEC |
@@ -25,8 +23,6 @@
 | 画面、永続化、i18n (プラグイン) | プラグイン側 `docs/` (アダプタ仕様) |
 | 最短手順・インストール | ルート `README.md` |
 | 統合の見取り図 | `docs/specs.md` または `service_spec.md` / `plugin_spec.md` (要約。細部の正本ではない) |
-
-矛盾時は **規則・契約の正本** を直し、README、要約、usage を追随させます。
 
 ## 2. 用語
 
@@ -54,9 +50,11 @@
 
 ## 6. イニシアチブ証跡 (archive)
 
-実装・改修の区切りごとに、人が読める合格証跡を残す。PHPUnit の HTML / XML など機械成果物とは別である (カバレッジは `/coverage/` 等。gitignore)。
+実装・改修の区切りごとに、人が読める合格証跡を残します。PHPUnit の HTML / XML など機械成果物とは別です (カバレッジは `/coverage/` 等。gitignore)。
 
 ### 6.1. 命名
+
+`<slug>` は短い kebab-case です。SemVer はフォルダー名に入れません。
 
 | 種類 | フォルダー | いつ使うか |
 | --- | --- | --- |
@@ -64,11 +62,9 @@
 | 改修イニシアチブ | `docs/archive/mod-<slug>/` | すでに `docs/` にある仕様・振る舞いを変える |
 | 仕様リライトの旧正本 | `docs/archive/spec-<slug>/` または簡潔な英文名 | 公開正本の一式を置き換えた場合の旧版 |
 
-`<slug>` は短い kebab-case。SemVer はフォルダー名に入れない。
-
 ### 6.2. 三点セット
 
-作業中は `docs_mod/`、完了時に archive にフリーズする。
+作業中は `docs_mod/`、完了時に archive にフリーズします。
 
 | ファイル | 書くこと | 書かないこと |
 | --- | --- | --- |
@@ -92,19 +88,19 @@
 
 ### 6.5. 全体 status との関係
 
+索引は [archive/README.md](./archive/README.md) です (各リポジトリで作成)。
+
 * `docs/status.md` (または同等) は、製品全体の「いま」である。
 * `docs/archive/.../status.md` は、そのイニシアチブ完了時点の凍結である。
 * 全体 status に、進行中の `docs_mod/` と直近 archive へのリンクを短く置いてよい。進捗表の二重管理はしない。
 
-索引は [archive/README.md](./archive/README.md) である (各リポジトリで作成)。
-
 ## 7. `docs/archive/README.md` に置くもの
+
+機械成果物は、archive に置きません。
 
 * 本ガバナンスへのリンク (規則の正本はこちら)
 * 命名の一行要約 (`impl-` / `mod-` / 仕様リライト)
 * 完了イニシアチブの索引表 (日付・フォルダー・種別・一言)
-
-機械成果物は、archive に置かない。
 
 ## 8. `docs_mod/README.md` に置くもの (推奨)
 
