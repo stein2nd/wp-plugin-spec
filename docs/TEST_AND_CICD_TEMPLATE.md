@@ -18,6 +18,8 @@
 
 Local (日常スモーク)、WordPress Studio (Blueprint 検証)、PHPUnit (テスト DB) の役割は、共通正本 [`SMOKE_AND_WP_ENVIRONMENTS.md`](./SMOKE_AND_WP_ENVIRONMENTS.md) に従います。ローカルで Docker なし PHPUnit を回す下準備と `.env.tests` は [`PHPUNIT_LOCAL.md`](./PHPUNIT_LOCAL.md) を正とします。
 
+**HTTP / HTTPS:** `./docs/status.md` の「100% 完了条件チェックリスト」で **非 HTTPS** と **HTTPS** (または Local 可 / 要 HTTPS) を分けます。自動 PR ゲートは非 HTTPS (PHPUnit / smoke / lint) を優先し、OAuth / Webhook / 実 SaaS は [`SMOKE_AND_WP_ENVIRONMENTS.md`](./SMOKE_AND_WP_ENVIRONMENTS.md) §5と [`CLOUDFLARE_TUNNEL.md`](./CLOUDFLARE_TUNNEL.md) に従う手動 Pass とします。
+
 ## 1. 目的
 
 * PR 時点で **最低限の品質保証 (Lint / Static Analysis / ユニットテスト / Build)** を自動化し、レビュー負荷と不具合混入を減らす。

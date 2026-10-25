@@ -8,6 +8,20 @@
 
 * [WordPress コーディング規約ハンドブック](https://ja.wordpress.org/team/handbook/coding-standards/)
 * [WordPress プラグイン開発ハンドブック](https://ja.wordpress.org/team/handbook/plugin-development/)
+* [WordPress 推奨要件](https://ja.wordpress.org/about/requirements/) (PHP / データベース / HTTPS。英語: [wordpress.org/about/requirements](https://wordpress.org/about/requirements/))
+
+### 1.1. WordPress 実行要件 (推奨)
+
+公式 [推奨要件](https://ja.wordpress.org/about/requirements/) を前提に、本リポジトリ配下のプラグイン・連携ライブラリでは次をそろえる。
+
+| 項目 | WordPress 推奨 (要約) | 本共通仕様 |
+| --- | --- | --- |
+| PHP | **v8.3以上** (公式ページで最新を確認) | プラグイン `Requires PHP` と Composer `require.php` の **下限を同一** にする (例: `^8.3`)。CI でその PHP 下限を実行する |
+| データベース | [推奨要件](https://ja.wordpress.org/about/requirements/) の MySQL / MariaDB | 開発サイト DB (`local` 等) と PHPUnit 用 **`wordpress_test` を分離** ([`PHPUNIT_LOCAL.md`](./PHPUNIT_LOCAL.md)) |
+| HTTPS | **推奨** (本番)。mod_rewrite 等 | **本番・ステージング** は HTTPS。**Local / Studio 日常** は `http://localhost` 可。OAuth / Webhook / 実 SaaS の Pass は **一時 HTTPS** ([`CLOUDFLARE_TUNNEL.md`](./CLOUDFLARE_TUNNEL.md)) または常設ステージング ([`SMOKE_AND_WP_ENVIRONMENTS.md`](./SMOKE_AND_WP_ENVIRONMENTS.md) §5) |
+| Web サーバー | Apache / nginx + リライト | Local / Studio / ホスティングが提供。プラグイン仕様ではサーバー構築手順まで書かない |
+
+WordPress 本体のバージョンは、各プラグイン `Requires at least` / `Tested up to` と [`README.md`](../README.md) バッジで宣言する。
 
 ## 2. 設計方針
 
@@ -238,6 +252,7 @@ docs だけの整備は archive 任意。コードまたは契約が動くイニ
 * **Local** を日常開発と段階1のスモークに、**WordPress Studio (Blueprints)** を段階2の再現可能な検証サイトに、**PHPUnit (テスト専用 DB)** を段階3の自動テストに使う構成を推奨する。
 * Docker / wp-env は CI 用としてよい。ローカル開発で Docker を必須にしない。
 * 環境の役割分担の正本は [`SMOKE_AND_WP_ENVIRONMENTS.md`](./SMOKE_AND_WP_ENVIRONMENTS.md)。**wp-env なし** の Local PHPUnit 手順 (MySQL、`svn`、`.env.tests`) は [`PHPUNIT_LOCAL.md`](./PHPUNIT_LOCAL.md)。
+* **非 HTTPS** と **一時 HTTPS** (CloudFlare Tunnel 等) で完結できるテストの担当範囲、および `./docs/status.md`「100% 完了条件チェックリスト」の書き方は [`SMOKE_AND_WP_ENVIRONMENTS.md`](./SMOKE_AND_WP_ENVIRONMENTS.md) §5。PHPUnit と TLS の関係は [`PHPUNIT_LOCAL.md`](./PHPUNIT_LOCAL.md) §6。
 * 各プラグインの件数、npm スクリプト、結果は `./docs/test-results.md` に書く。
 
 ## 6. スタイル規約

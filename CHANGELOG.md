@@ -2,6 +2,21 @@
 
 ## unreleased
 
+## 2.0.15 - 2026-10-25
+
+### Added
+
+* `docs/CLOUDFLARE_TUNNEL.md` — Quick Tunnel 手順、送信 / 受信の使い分け、料金・セキュリティ、6.4節ログ調査 (`cloudflared` / WordPress / PHP / Guzzle)。Guzzle は dev 限定・オプトイン (自動テストの主役にしない旨)
+
+### Changed
+
+* `docs/SMOKE_AND_WP_ENVIRONMENTS.md` §5— 非 HTTPS と一時 HTTPS (CloudFlare Tunnel) のテスト担当範囲、`status.md` チェックリスト (Local 可 / 要 HTTPS)
+* `docs/PHPUNIT_LOCAL.md` §6— HTTP / HTTPS と PHPUnit (CI ゲートとトンネル不要の原則)
+* `docs/SPECS.md` §1.1— [WordPress 推奨要件](https://ja.wordpress.org/about/requirements/) との整合 (PHP / DB / HTTPS)
+* `docs/TEST_AND_CICD_TEMPLATE.md` — PR ゲート (非 HTTPS) と OAuth / Webhook 手動 Pass の整理
+* `README.md` — PHP v8.3+、推奨 DB、`CLOUDFLARE_TUNNEL.md` へのリンク
+* `.textlintrc.json` — docs-linter allowlist (`#status-*` アンカー等)
+
 ## 2.0.14 - 2026-10-16
 
 ### Added

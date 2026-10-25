@@ -11,9 +11,9 @@
 
 ## 1. 技術スタック
 
-* **言語**: PHP (8.x 系) / TypeScript
+* **言語**: PHP ([WordPress 推奨](https://ja.wordpress.org/about/requirements/) に合わせ **v8.3+**。プラグイン `Requires PHP` と Composer `require.php` をそろえる) / TypeScript
 * **UI**: React (Gutenberg / 管理画面)。実行時は WordPress が提供する React を使う
-* **対象**: WordPress プラグイン (WordPress 6.9+)
+* **対象**: WordPress プラグイン (WordPress v6.9+)。DB は [WordPress 推奨要件](https://ja.wordpress.org/about/requirements/) に準拠 ([`SPECS.md` §1.1](./docs/SPECS.md))
 * **ビルド**: Vite + Dart SASS。成果物は `dist/`
 * **依存管理**: npm または PHP Composer。WordPress 本体と `@wordpress/*` は対象外
 * **テスト**: PHPUnit (ドメインを厚く) + PHPCS / PHPStan + ESLint / `tsc` + Playwright
@@ -51,6 +51,7 @@
 * [`docs/CICD.md`](./docs/CICD.md) — CI/CD
 * [`docs/SMOKE_AND_WP_ENVIRONMENTS.md`](./docs/SMOKE_AND_WP_ENVIRONMENTS.md) — スモークと WordPress 環境 (Local / Studio / PHPUnit)
 * [`docs/PHPUNIT_LOCAL.md`](./docs/PHPUNIT_LOCAL.md) — PHPUnit (wp-env なし / Local + テスト専用 DB)
+* [`docs/CLOUDFLARE_TUNNEL.md`](./docs/CLOUDFLARE_TUNNEL.md) — 一時 HTTPS (OAuth / Webhook 検証)
 * [`docs/archive/README.md`](./docs/archive/README.md) — 凍結スナップショットの索引
 
 旧正本・イニシアチブ証跡は、[`docs/archive/`](./docs/archive/) に freeze します。

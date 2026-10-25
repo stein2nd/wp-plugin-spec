@@ -21,7 +21,7 @@
 
 ### 2.1. PHP と Composer
 
-* PHP **8.x** (プラグインの `Requires PHP` に合わせる)。
+* PHP **v8.x** (プラグインの `Requires PHP` に合わせる)。
 * リポジトリルートで `composer install`。
 * PHPUnit **v9** を `vendor/bin/phpunit` で使う構成を推奨 (WP テストスイートとの互換。wp-env コンテナ同梱の PHPUnit v10は非互換のことがある)。
 
@@ -144,9 +144,35 @@ npm run test:unit:php:local        # または composer test:all
 | `svn: command not found` | Subversion を PATH に追加 |
 | 開発 DB を汚したくない | `WP_TESTS_DB_NAME` を `local` にしない。ユニットのみ実行 |
 
-## 6. 関連
+## 6. HTTP / HTTPS と PHPUnit
 
-* [`SMOKE_AND_WP_ENVIRONMENTS.md`](./SMOKE_AND_WP_ENVIRONMENTS.md) — Local / Studio / PHPUnit の役割
-* [`SPECS.md`](./SPECS.md) §5 (テスト、結果マーク)
+PHPUnit (本書の段階3) は、**開発サイトが HTTP でも** テスト専用 DB 上で完結します。サイトの `home` / `siteurl` が HTTPS か否かは、**統合テストの大半では不要** です。製品の100% 条件は `./docs/status.md` で **非 HTTPS** と **HTTPS** に分けます ([`SMOKE_AND_WP_ENVIRONMENTS.md`](./SMOKE_AND_WP_ENVIRONMENTS.md) §5)。
+
+### 6.1. 非 HTTPS 環境
+
+| 区分 | 自動 (PHPUnit / CI) で可能 | 自動で不可能 (別ゲート) |
+| --- | --- | --- |
+| **Composer ライブラリ** | `vendor/bin/phpunit` 全件、PHPStan、PHPCS (WordPress 不要) | プラグイン経由の E2E、実 `wp_mail` |
+| **プラグイン — ユニット** | ドメイン純関数、`tests/bootstrap-unit.php` | — |
+| **プラグイン — 統合** | `WP_UnitTestCase`、REST、オプション、メタ (テスト DB) | 管理画面 JS、OAuth リダイレクト先が **公衆 HTTPS** であることの検証 |
+| **外向き HTTP** | `wp_remote_*` をモック / 固定 body の PHPUnit | ステージング Zoom / Backlog / Asana への **実リクエスト** Pass |
+| **メール** | `pre_wp_mail` 等で bool を差し替えたテスト | 受信箱到達 (プラグイン status の HTTPS §) |
+
+**CI (GitHub Actions + wp-env)** も非 HTTPS オリジンで PHPUnit を回します。Pull Request ゲートの正本はここ (非 HTTPS) とします。
+
+### 6.2. 一時 HTTPS 環境 (CloudFlare Tunnel)
+
+| 区分 | 自動で可能 | 自動で不可能 (手動) |
+| --- | --- | --- |
+| **PHPUnit** | 原則 **トンネル不要** (引き続き `test:unit:php:local` / CI) | OAuth 完了後の token 保存、Webhook 受信の **端到端** |
+| **補助** | トンネル URL を定数に渡す **少数** の結合テスト (製品が明示した場合のみ) | Zoom E1/E2/E3、Survey E4、SaaS 起票の browser / 実 API Pass |
+
+トンネル手順: [`CLOUDFLARE_TUNNEL.md`](./CLOUDFLARE_TUNNEL.md)。Pass 記録: `./docs/test-results.md`。
+
+## 7. 関連
+
+* [`SMOKE_AND_WP_ENVIRONMENTS.md`](./SMOKE_AND_WP_ENVIRONMENTS.md) — Local / Studio / PHPUnit、HTTP / HTTPS 分担
+* [`CLOUDFLARE_TUNNEL.md`](./CLOUDFLARE_TUNNEL.md) — 一時 HTTPS
+* [`SPECS.md`](./SPECS.md) §1.1 / §5 (WordPress 推奨要件、テスト)
 * [`TEST_AND_CICD_TEMPLATE.md`](./TEST_AND_CICD_TEMPLATE.md) — プラグイン固有 CI
 * [`CICD.md`](./CICD.md) — 共通 CI
