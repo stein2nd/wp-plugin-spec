@@ -73,6 +73,19 @@ WordPress プラグイン / テーマでは、国際化関数を介して「原�
 * リリース時の生成フロー:
 * 翻訳の更新ポリシー (例: PR で更新、リリース前に更新など):
 
+### 2.3. Gutenberg / 管理 JS (`wp_set_script_translations`)
+
+JS バンドル (`dist/js/…`) 内の `@wordpress/i18n` 文言は、PHP の `.mo` ではなく **JED** (`languages/{text-domain}-{locale}-{md5}.json`) で配信します。
+
+* **ハッシュ `{md5}`** — 対象 JS の **プラグインルートからの相対パス** (例: `dist/js/<plugin-slug>-gutenberg.js`)。Vite 等の **`entryFileNames` を固定**し、`*-a.js` のような一時名で `make-json` しない。
+* **管理画面バンドル名** — 出力は **`dist/js/<plugin-slug>-settings.js`** (CSS も `-settings.css`)。npm スクリプト名は従来どおり `build:*:admin` のまま、Vite の build target だけ `settings` にする。`…-admin.js` や `…-site-admin.js` は `wp i18n make-json` が `…-a.js` / `…-site-a.js` に誤マッチするため **使わない**。
+* **バンドル名の衝突** — ある `dist/js/…` パスが別バンドルパス文字列の **接頭辞** になる命名は避ける。孤児 JED は purge のあと `makepot` で PO をそろえる。
+* **`npm run makejson`** — `wp i18n make-json languages` (**purge デフォルト**。`--no-purge` は使わない)。`dist/` に存在しない `source` 向け JED は **孤児として削除**される。
+* **`npm run makejson:keep`** — デバッグ用のみ `wp i18n make-json languages --no-purge` (孤児を残す。通常コミット前は使わない)。
+* **実行タイミング** — 本番ビルドの **`postbuild:production:*`** (対象 `dist/` ができた直後)。`makei18n` = `makemo` + `makejson` は PO 更新後の手動/CI 用。
+* **Git** — 有効な `languages/*-{32hex}.json` は **リポジトリにコミット**する (`dist/` は gitignore でも JED は zip 同梱・実行時 lookup に必要)。**.gitignore に `languages/*.json` を入れない**。
+* **PHP** — 該当 script handle に `wp_set_script_translations( $handle, '<text-domain>', <plugin-dir> . 'languages' )` を付ける。
+
 ## 3. A11y (アクセシビリティ) 基本方針
 
 * **スクリーン・リーダー**:
@@ -105,6 +118,7 @@ WordPress プラグイン / テーマでは、国際化関数を介して「原�
 * [ ] 文章の連結がなく、プレースホルダで構築している
 * [ ] 文脈が必要な文言は `_x()` を使っている
 * [ ] ドメイン純関数に翻訳文字列が混ざっていない
+* [ ] Gutenberg JS — `makejson` (purge あり) 後、孤児 JED が残っていない。`wp_set_script_translations` と `dist/js` ファイル名が一致している
 
 ### 4.2. A11y
 

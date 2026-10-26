@@ -145,7 +145,7 @@ wp option update siteurl 'https://<tunnel-host>.trycloudflare.com'
 * **REST / Webhook:** プラグインの REST コールバック内で、受信メソッド、ルート、HTTP ステータス、検証結果 (challenge / 署名 OK / NG) を **構造化して** 記録する。生 body 全文や `Authorization` ヘッダーは **ログに出さない** (製品 `status.md` / セキュリティレビューと一致させる)。
 * **Local の場所:** サイトルート `wp-content/debug.log` (Local → サイト → **Go to site folder** → `app/public/wp-content/`)。
 * **WP-CLI:** `wp eval` や `wp option get` で **URL や非秘密の設定** を確認するのは可。Client Secret / Webhook Secret / アクセストークン / API キー等を、ターミナルに `var_dump`・`print_r`・オプション丸ごと出力 **しない** (「秘密の dump」= 資格情報の丸出し全般。秘密鍵だけに限らない)。
-* **プラグインから Zoom へ送信:** HTTP は多くの場合 `wp_remote_*` アダプタ ([`SPECS.md`](./SPECS.md) §2.2)。結果は本節の `debug.log` 等で見る (Guzzle §6.4.4は **Service の CLI 試験** 向け)。
+* **プラグインから Zoom に送信:** HTTP は多くの場合 `wp_remote_*` アダプタ ([`SPECS.md`](./SPECS.md) §2.2)。結果は本節の `debug.log` 等で見る (Guzzle §6.4.4は **Service の CLI 試験** 向け)。
 
 #### 6.4.3. PHP の出力・ログ
 

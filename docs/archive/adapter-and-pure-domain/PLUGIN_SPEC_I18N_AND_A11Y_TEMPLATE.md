@@ -69,6 +69,19 @@
 * リリース時の生成フロー:
 * 翻訳の更新ポリシー (例: PR で更新、リリース前に更新など):
 
+### 2.3. Gutenberg / 管理 JS (`wp_set_script_translations`)
+
+JS バンドル (`dist/js/…`) 内の `@wordpress/i18n` 文言は、PHP の `.mo` ではなく **JED** (`languages/{text-domain}-{locale}-{md5}.json`) で配信する。
+
+* **ハッシュ `{md5}`** — 対象 JS の **プラグインルートからの相対パス** (例: `dist/js/<plugin-slug>-gutenberg.js`)。Vite 等の **`entryFileNames` を固定**し、`*-a.js` のような一時名で `make-json` しない。
+* **管理画面バンドル名** — **`dist/js/<plugin-slug>-settings.js`**（npm は `build:*:admin`、Vite target は `settings`）。`-admin.js` / `-site-admin.js` は make-json 誤マッチのため使わない。
+* **バンドル名の衝突** — プレフィックス衝突する命名は避ける。孤児 JED は purge + `makepot` で整理。
+* **`npm run makejson`** — `wp i18n make-json languages` (**purge 既定**)。`dist/` に存在しない `source` 向け JED は **孤児として削除**される。
+* **`npm run makejson:keep`** — デバッグ用のみ `--no-purge` (通常コミット前は使わない)。
+* **Git** — 有効な `languages/*-{32hex}.json` は **コミット**する。**`.gitignore` に `languages/*.json` を入れない**。
+
+正本の詳細はリポジトリ直下 `docs/I18N_AND_A11Y_TEMPLATE.md` §2.3 を参照。
+
 ---
 
 ## 3. A11y (アクセシビリティ) 基本方針

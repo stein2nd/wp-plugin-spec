@@ -12,7 +12,7 @@
 
 ### 1.1. WordPress 実行要件 (推奨)
 
-公式 [推奨要件](https://ja.wordpress.org/about/requirements/) を前提に、本リポジトリ配下のプラグイン・連携ライブラリでは次をそろえる。
+公式 [推奨要件](https://ja.wordpress.org/about/requirements/) を前提に、本リポジトリ配下のプラグイン・連携ライブラリでは次をそろえます。
 
 | 項目 | WordPress 推奨 (要約) | 本共通仕様 |
 | --- | --- | --- |
@@ -21,7 +21,7 @@
 | HTTPS | **推奨** (本番)。mod_rewrite 等 | **本番・ステージング** は HTTPS。**Local / Studio 日常** は `http://localhost` 可。OAuth / Webhook / 実 SaaS の Pass は **一時 HTTPS** ([`CLOUDFLARE_TUNNEL.md`](./CLOUDFLARE_TUNNEL.md)) または常設ステージング ([`SMOKE_AND_WP_ENVIRONMENTS.md`](./SMOKE_AND_WP_ENVIRONMENTS.md) §5) |
 | Web サーバー | Apache / nginx + リライト | Local / Studio / ホスティングが提供。プラグイン仕様ではサーバー構築手順まで書かない |
 
-WordPress 本体のバージョンは、各プラグイン `Requires at least` / `Tested up to` と [`README.md`](../README.md) バッジで宣言する。
+WordPress 本体のバージョンは、各プラグイン `Requires at least` / `Tested up to` と [`README.md`](../README.md) バッジで宣言します。
 
 ## 2. 設計方針
 
@@ -159,7 +159,7 @@ WordPress のプラグイン / テーマでは、国際化関数を介して「�
 
 * 仕様では「コードから日本語を表示する」など特定言語を前提とした表現を使わない。
 * 「コードから適切なメッセージ文を表示する」など、ロケール非依存の表現に統一する。
-* 前提として、表示文言はハードコードせず、国際化対応の関数を必ず使用する (詳細は `I18N_AND_A11Y_TEMPLATE.md`)。
+* 前提として、表示文言はハードコードせず、国際化対応の関数を必ず使用する (詳細は `I18N_AND_A11Y_TEMPLATE.md`)。Gutenberg / 管理 JS の JED と `makejson` purge 方針は同文書 **§2.3**。
 
 ### 4.3. 仕様書のライフサイクル
 
@@ -186,9 +186,11 @@ WordPress のプラグイン / テーマでは、国際化関数を介して「�
 
 ### 4.5. イニシアチブ証跡 (archive)
 
-完了した実装・改修の **凍結スナップショット** を `docs/archive/` に残す。WordPress プラグインと Composer ライブラリで同じ型とする。
+完了した実装・改修の **凍結スナップショット** を `docs/archive/` に残します。WordPress プラグインと Composer ライブラリで同じ型とします。
 
 #### 命名
+
+`<slug>` は短い kebab-case とします。SemVer はフォルダー名に入れず、`status.md` や CHANGELOG に書きます。
 
 | 種類 | フォルダー | いつ使うか |
 | --- | --- | --- |
@@ -196,11 +198,9 @@ WordPress のプラグイン / テーマでは、国際化関数を介して「�
 | 改修イニシアチブ | `docs/archive/mod-<slug>/` | すでに `docs/` にある仕様・振る舞いを変える |
 | 仕様リライトの旧正本 | `docs/archive/spec-<slug>/` または簡潔な英文名 | 公開正本の一式を置き換えた場合の旧版 freeze (例: `adapter-and-pure-domain`) |
 
-`<slug>` は短い kebab-case。SemVer はフォルダー名に入れず、`status.md` や CHANGELOG に書く。
-
 #### 三点セット (impl / mod)
 
-作業中は `docs_mod/` に置き、完了時に archive にフリーズする。
+作業中は `docs_mod/` に置き、完了時に archive にフリーズします。
 
 | ファイル | 書くこと | 書かないこと |
 | --- | --- | --- |
@@ -216,7 +216,7 @@ WordPress のプラグイン / テーマでは、国際化関数を介して「�
 4. **フリーズ後** … archive 配下は原則変更しない。続きは新しい `mod-*` / `impl-*`
 5. **片付け** … `docs_mod/` の三点は削除してよい (`docs_mod/` と README は残す)
 
-docs だけの整備は archive 任意。コードまたは契約が動くイニシアチブでは三点セットを切る。
+docs だけの整備は archive 任意です。コードまたは契約が動くイニシアチブでは三点セットを切ります。
 
 索引・一覧表の置き場は各リポジトリの `docs/archive/README.md` とする。規則の正本は `docs/governance/documentation_governance.md` (または本節とひな型)。
 

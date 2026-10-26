@@ -2,6 +2,17 @@
 
 ## unreleased
 
+## 2.0.16 - 2026-10-26
+
+### Added
+
+* `docs/I18N_AND_A11Y_TEMPLATE.md` §2.3— Gutenberg / 管理 JS の JED、`makejson` (purge デフォルト)、`wp_set_script_translations`、固定 `dist/js` バンドル名 (`-settings.js` 等)
+
+### Changed
+
+* `docs/SPECS.md` — §4.2から `I18N_AND_A11Y_TEMPLATE.md` §2.3に参照。§4.5archive 命名・文体の整理
+* `docs/archive/adapter-and-pure-domain/PLUGIN_SPEC_I18N_AND_A11Y_TEMPLATE.md` — §2.3要約 (正本 `I18N_AND_A11Y_TEMPLATE.md` にリンク)
+
 ## 2.0.15 - 2026-10-25
 
 ### Added
