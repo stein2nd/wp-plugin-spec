@@ -79,6 +79,7 @@ JS バンドル (`dist/js/…`) 内の `@wordpress/i18n` 文言は、PHP の `.m
 * **`npm run makejson`** — `wp i18n make-json languages` (**purge 既定**)。`dist/` に存在しない `source` 向け JED は **孤児として削除**される。
 * **`npm run makejson:keep`** — デバッグ用のみ `--no-purge` (通常コミット前は使わない)。
 * **Git** — 有効な `languages/*-{32hex}.json` は **コミット**する。**`.gitignore` に `languages/*.json` を入れない**。
+* **PO → JED** — 空 `msgstr` は JED に載らない。`update-po` → 訳 → `makejson`。必要なら `tools/i18n/fill-empty-msgstr.php` + maps。
 
 正本の詳細はリポジトリ直下 `docs/I18N_AND_A11Y_TEMPLATE.md` §2.3 を参照。
 

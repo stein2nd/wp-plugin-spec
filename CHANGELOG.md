@@ -2,6 +2,14 @@
 
 ## unreleased
 
+## 2.0.17 - 2026-10-26
+
+### Changed
+
+* `docs/I18N_AND_A11Y_TEMPLATE.md` §2.3— PO → JED (訳済み `msgstr` のみ出力)、`update-po` フロー、任意 `tools/i18n/fill-empty-msgstr.php` + maps。Gutenberg 向け checklist 追記
+* `docs/SPECS.md` §4.2— 上記 PO / JED 方針への参照
+* `docs/archive/adapter-and-pure-domain/PLUGIN_SPEC_I18N_AND_A11Y_TEMPLATE.md` — 正本 §2.3へ PO → JED 要約を追記
+
 ## 2.0.16 - 2026-10-26
 
 ### Added
